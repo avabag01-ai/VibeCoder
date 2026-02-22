@@ -3,11 +3,49 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VibeCoder — 바이브 코더 커뮤니티</title>
-  <meta name="description" content="AI로 만든 프로젝트를 공유하고, 팁을 나누는 바이브 코더 커뮤니티. 쇼케이스 · 라운지 · 툴 허브"/>
+  <title>VibeCoder — 바이브 코더 커뮤니티 | AI 앱 만들기, 바이브코딩, Claude, Cursor</title>
+  <meta name="description" content="바이브코딩으로 AI 앱을 만드는 사람들의 커뮤니티. Claude, ChatGPT, Cursor로 만든 프로젝트를 공유하고 팁을 나누세요. 비개발자도 OK."/>
+  <meta name="keywords" content="바이브코딩, vibe coding, AI 앱 만들기, Claude, ChatGPT, Cursor, 바이브 코더, 비개발자 개발, AI 자동화, 노코드, AI 프로젝트, 바이브코딩 커뮤니티"/>
+  <meta name="author" content="VibeCoder"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://vibecoder-328967213016.asia-northeast3.run.app/"/>
+
+  <!-- Open Graph (카카오/페이스북/슬랙 링크 공유) -->
   <meta property="og:title" content="VibeCoder — 바이브 코더 커뮤니티"/>
-  <meta property="og:description" content="AI로 만든 프로젝트를 공유하고, 팁을 나누는 바이브 코더 커뮤니티"/>
+  <meta property="og:description" content="Claude, ChatGPT, Cursor로 앱을 만드는 사람들의 집합소. 프로젝트 쇼케이스 · 라운지 · 툴 허브"/>
   <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://vibecoder-328967213016.asia-northeast3.run.app/"/>
+  <meta property="og:site_name" content="VibeCoder"/>
+  <meta property="og:locale" content="ko_KR"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="VibeCoder — 바이브 코더 커뮤니티"/>
+  <meta name="twitter:description" content="AI로 앱을 만드는 사람들의 커뮤니티. 바이브코딩 시작했다면 여기로."/>
+
+  <!-- JSON-LD 구조화 데이터 (Google/Gemini Search 인식용) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "VibeCoder",
+    "alternateName": "바이브코더",
+    "url": "https://vibecoder-328967213016.asia-northeast3.run.app/",
+    "description": "AI로 앱을 만드는 바이브 코더들의 프로젝트 쇼케이스 & 커뮤니티. Claude, ChatGPT, Cursor 사용자 모임.",
+    "inLanguage": "ko",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://vibecoder-328967213016.asia-northeast3.run.app/showcase?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "VibeCoder",
+      "url": "https://vibecoder-328967213016.asia-northeast3.run.app/"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
@@ -376,28 +414,28 @@
 <header>
   <nav>
     <a href="/" class="logo">⚡ VibeCoder</a>
-    <a href="/showcase">쇼케이스</a>
-    <a href="/lounge">라운지</a>
-    <a href="/submit" class="nav-cta">프로젝트 올리기</a>
+    <a href="/showcase" data-i18n="nav_showcase">쇼케이스</a>
+    <a href="/lounge" data-i18n="nav_lounge">라운지</a>
+    <a href="/submit" class="nav-cta" data-i18n="nav_submit">프로젝트 올리기</a>
   </nav>
 </header>
 
 <!-- 히어로 -->
 <div class="hero">
   <div class="hero-badge">
-    <span>✨</span> AI로 만든 프로젝트의 집합소
+    <span>✨</span> <span data-i18n="badge">AI로 만든 프로젝트의 집합소</span>
   </div>
   <h1 class="hero-title">
-    <span class="line1">바이브 코딩으로</span><br/>
-    <span class="line2">세상을 바꾸는 사람들</span>
+    <span class="line1" data-i18n="hero_line1">바이브 코딩으로</span><br/>
+    <span class="line2" data-i18n="hero_line2">세상을 바꾸는 사람들</span>
   </h1>
-  <p class="hero-sub">
+  <p class="hero-sub" data-i18n="hero_sub">
     Claude, ChatGPT, Cursor로 앱을 만들고 있다면 여기가 당신의 자리입니다.<br/>
     프로젝트를 공유하고, 팁을 나누고, 동료를 만나세요.
   </p>
   <div class="hero-actions">
-    <a href="/showcase" class="btn-primary">🚀 프로젝트 보기</a>
-    <a href="/submit" class="btn-secondary">내 프로젝트 올리기</a>
+    <a href="/showcase" class="btn-primary" data-i18n="btn_showcase">🚀 프로젝트 보기</a>
+    <a href="/submit" class="btn-secondary" data-i18n="btn_submit">내 프로젝트 올리기</a>
   </div>
 </div>
 
@@ -405,19 +443,19 @@
 <div class="stats-bar">
   <div class="stat-item">
     <div class="stat-num" id="stat-projects">{{ project_count }}</div>
-    <div class="stat-label">등록된 프로젝트</div>
+    <div class="stat-label" data-i18n="stat_projects">등록된 프로젝트</div>
   </div>
   <div class="stat-item">
     <div class="stat-num" id="stat-posts">{{ post_count }}</div>
-    <div class="stat-label">커뮤니티 글</div>
+    <div class="stat-label" data-i18n="stat_posts">커뮤니티 글</div>
   </div>
   <div class="stat-item">
     <div class="stat-num" id="stat-days">–</div>
-    <div class="stat-label">⚡ 바이브코딩 시작 D+</div>
+    <div class="stat-label" data-i18n="stat_days">⚡ 바이브코딩 시작 D+</div>
   </div>
   <div class="stat-item">
     <div class="stat-num">∞</div>
-    <div class="stat-label">가능성</div>
+    <div class="stat-label" data-i18n="stat_possible">가능성</div>
   </div>
 </div>
 
@@ -659,6 +697,39 @@ window.addEventListener('load',()=>{
     countUp(dEl, days);
   }
 });
+
+/* ── i18n: 브라우저 언어 감지 → 영문 자동 전환 ── */
+(function initI18n(){
+  const lang = (navigator.language || navigator.userLanguage || 'ko').toLowerCase();
+  const isKo = lang.startsWith('ko');
+  if(isKo) return; // 한국어면 기본 HTML 그대로
+
+  const en = {
+    nav_showcase: 'Showcase',
+    nav_lounge:   'Lounge',
+    nav_submit:   'Submit Project',
+    badge:        'Where AI-built projects live',
+    hero_line1:   'Vibe Coders',
+    hero_line2:   'Changing the World',
+    hero_sub:     "If you're building with Claude, ChatGPT, or Cursor — this is your home.<br/>Share projects, swap tips, and meet your people.",
+    btn_showcase: '🚀 Browse Projects',
+    btn_submit:   'Submit Mine',
+    stat_projects:'Projects',
+    stat_posts:   'Community Posts',
+    stat_days:    '⚡ Days Vibe Coding',
+    stat_possible:'Possibilities',
+  };
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(en[key]) el.innerHTML = en[key];
+  });
+
+  // 페이지 타이틀 & description
+  document.title = 'VibeCoder — Vibe Coder Community | AI App Builder Hub';
+  const desc = document.querySelector('meta[name="description"]');
+  if(desc) desc.content = 'Community for vibe coders building apps with Claude, ChatGPT, and Cursor. Share projects, tips, and connect — no coding background needed.';
+})();
 </script>
 
 </body>
