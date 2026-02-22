@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>코더스 라운지 — VibeCoder</title>
+  <meta name="description" content="바이브 코더들의 커뮤니티. AI 코딩 꿀팁, Q&A, 자유 토론. 가입 없이 바로 참여."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#050508;--surface:#0d0d14;--surface2:#13131e;--border:rgba(255,255,255,.06);
+      --accent:#7c3aed;--accent2:#06b6d4;--text:#f1f5f9;--muted:#64748b;--radius:14px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+    canvas#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;}
+    .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.06;animation:orbFloat 22s ease-in-out infinite;}
+    .orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,#7c3aed,transparent);top:-100px;right:-100px;}
+    .orb:nth-child(2){width:350px;height:350px;background:radial-gradient(circle,#06b6d4,transparent);bottom:5%;left:-50px;animation-delay:-10s;}
+    @keyframes orbFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,40px);}}
+    .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);
+      background-size:60px 60px;animation:gridShift 40s linear infinite;}
+    @keyframes gridShift{0%{background-position:0 0;}100%{background-position:60px 60px;}}
+    .content{position:relative;z-index:1;}
+
+    header{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+    nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;height:64px;padding:0 24px;}
+    .logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;margin-right:auto;}
+    nav a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s;}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.05);}
+    .nav-cta{background:linear-gradient(135deg,#7c3aed,#5b21b6)!important;color:#fff!important;padding:8px 18px!important;}
+
+    main{max-width:960px;margin:0 auto;padding:60px 24px;}
+    .page-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;}
+    .page-title{font-size:2rem;font-weight:800;}
+    .write-btn{background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;text-decoration:none;
+      padding:10px 22px;border-radius:10px;font-size:.9rem;font-weight:600;box-shadow:0 2px 12px rgba(6,182,212,.3);transition:all .2s;}
+    .write-btn:hover{box-shadow:0 4px 20px rgba(6,182,212,.5);transform:translateY(-1px);}
+
+    /* 카테고리 탭 */
+    .cat-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+    .cat-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
+      color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;transition:all .2s;}
+    .cat-tab:hover,.cat-tab.active{background:rgba(6,182,212,.12);border-color:rgba(6,182,212,.3);color:#22d3ee;}
+
+    /* 게시글 목록 */
+    .posts-list{display:flex;flex-direction:column;gap:2px;}
+    .post-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+      padding:16px 20px;border-radius:10px;text-decoration:none;color:inherit;
+      background:transparent;border:1px solid transparent;transition:all .2s;}
+    .post-item:hover{background:var(--surface);border-color:var(--border);}
+    .post-cat-badge{padding:4px 10px;border-radius:6px;font-size:.72rem;font-weight:600;white-space:nowrap;}
+    .cat-tip{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.15);}
+    .cat-qna{background:rgba(6,182,212,.12);color:#22d3ee;border:1px solid rgba(6,182,212,.15);}
+    .cat-showcase{background:rgba(124,58,237,.12);color:#a78bfa;border:1px solid rgba(124,58,237,.15);}
+    .cat-free{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--border);}
+    .post-main{min-width:0;}
+    .post-title{font-size:.95rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
+    .post-info{font-size:.78rem;color:var(--muted);}
+    .post-right{text-align:right;white-space:nowrap;font-size:.78rem;color:var(--muted);}
+    .post-stats{display:flex;gap:10px;margin-top:4px;justify-content:flex-end;}
+
+    /* 헤더 행 */
+    .list-header{display:grid;grid-template-columns:auto 1fr auto;gap:16px;
+      padding:10px 20px;font-size:.78rem;color:var(--muted);border-bottom:1px solid var(--border);margin-bottom:4px;}
+
+    .pagination{display:flex;gap:8px;justify-content:center;margin-top:40px;}
+    .page-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+      border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;
+      background:var(--surface);border:1px solid var(--border);color:var(--muted);}
+    .page-btn:hover,.page-btn.active{background:rgba(6,182,212,.12);border-color:rgba(6,182,212,.3);color:#22d3ee;}
+
+    .empty-state{text-align:center;padding:80px 24px;color:var(--muted);}
+    .anon-notice{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15);
+      border-radius:10px;padding:14px 20px;margin-bottom:28px;
+      font-size:.85rem;color:#94a3b8;display:flex;align-items:center;gap:10px;}
+
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--muted);font-size:.85rem;margin-top:40px;}
+
+    body.low-perf canvas,body.low-perf .bg-orbs,body.low-perf .grid-bg{display:none!important;}
+    @media(prefers-reduced-motion:reduce){canvas,.bg-orbs,.grid-bg{display:none!important;}}
+    @media(max-width:640px){
+      nav a:not(.nav-cta):not(.logo){display:none;}
+      .post-item{grid-template-columns:1fr auto;}
+      .post-cat-badge{display:none;}
+    }
+  </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="bg-orbs"><div class="orb"></div><div class="orb"></div></div>
+<div class="grid-bg"></div>
+<div class="content">
+
+<header>
+  <nav>
+    <a href="/" class="logo">⚡ VibeCoder</a>
+    <a href="/showcase">쇼케이스</a>
+    <a href="/lounge">라운지</a>
+    <a href="/submit" class="nav-cta">프로젝트 올리기</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1 class="page-title">💬 코더스 라운지</h1>
+    <a href="/lounge/write" class="write-btn">✏️ 글 쓰기</a>
+  </div>
+
+  <div class="anon-notice">
+    💡 <span>가입 없이 바로 참여! 닉네임만 입력하면 글을 쓸 수 있어요. 본인 글은 비밀번호로 수정/삭제 가능합니다.</span>
+  </div>
+
+  <!-- 카테고리 탭 -->
+  <div class="cat-tabs">
+    <a href="/lounge" class="cat-tab {% if not category %}active{% endif %}">전체</a>
+    <a href="/lounge?category=tip" class="cat-tab {% if category=='tip' %}active{% endif %}">💡 꿀팁</a>
+    <a href="/lounge?category=qna" class="cat-tab {% if category=='qna' %}active{% endif %}">❓ Q&A</a>
+    <a href="/lounge?category=showcase" class="cat-tab {% if category=='showcase' %}active{% endif %}">🎨 쇼케이스</a>
+    <a href="/lounge?category=free" class="cat-tab {% if category=='free' %}active{% endif %}">💬 자유</a>
+  </div>
+
+  {% if posts %}
+  <div class="list-header">
+    <span>구분</span>
+    <span>제목</span>
+    <span>정보</span>
+  </div>
+  <div class="posts-list">
+    {% for post in posts %}
+    <a href="/lounge/{{ post.slug }}" class="post-item">
+      <span class="post-cat-badge cat-{{ post.category or 'free' }}">
+        {{ {'tip':'💡 꿀팁','qna':'❓ Q&A','showcase':'🎨 쇼케이스','free':'💬 자유'}.get(post.category, post.category) }}
+      </span>
+      <div class="post-main">
+        <div class="post-title">{{ post.title }}</div>
+        <div class="post-info">{{ post.author_name or '익명코더' }}</div>
+      </div>
+      <div class="post-right">
+        <div>{{ post.created_at | fmt_date }}</div>
+        <div class="post-stats">
+          <span>👁 {{ post.view_count }}</span>
+          <span>❤️ {{ post.likes }}</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if total_pages > 1 %}
+  <div class="pagination">
+    {% if page > 1 %}<a href="?page={{ page-1 }}{% if category %}&category={{ category }}{% endif %}" class="page-btn">←</a>{% endif %}
+    {% for p in range(1, total_pages+1) %}
+    <a href="?page={{ p }}{% if category %}&category={{ category }}{% endif %}" class="page-btn {% if p == page %}active{% endif %}">{{ p }}</a>
+    {% endfor %}
+    {% if page < total_pages %}<a href="?page={{ page+1 }}{% if category %}&category={{ category }}{% endif %}" class="page-btn">→</a>{% endif %}
+  </div>
+  {% endif %}
+
+  {% else %}
+  <div class="empty-state">
+    <div style="font-size:3rem;margin-bottom:16px">✍️</div>
+    <p style="margin-bottom:8px">아직 글이 없습니다.</p>
+    <p style="margin-bottom:24px;font-size:.9rem">첫 번째 글을 남겨보세요!</p>
+    <a href="/lounge/write" class="write-btn" style="font-size:1rem;padding:12px 28px;">글 쓰기</a>
+  </div>
+  {% endif %}
+</main>
+
+<footer>© 2025 VibeCoder</footer>
+</div>
+
+<script>
+(function(){
+  if(/Android|iPhone|iPad/i.test(navigator.userAgent)||(navigator.deviceMemory&&navigator.deviceMemory<4)){
+    document.body.classList.add('low-perf');return;
+  }
+  const canvas=document.getElementById('particles');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,pts;
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function init(){resize();pts=Array.from({length:35},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+    r:Math.random()*1.2+.4,c:Math.random()>.5?'#7c3aed':'#06b6d4'
+  }));}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach((p,i)=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c;ctx.globalAlpha=.45;ctx.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<90){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=p.c;ctx.globalAlpha=(1-d/90)*.1;ctx.lineWidth=.5;ctx.stroke();}
+      }
+    });ctx.globalAlpha=1;requestAnimationFrame(draw);
+  }
+  init();window.addEventListener('resize',init);draw();
+})();
+</script>
+</body>
+</html>

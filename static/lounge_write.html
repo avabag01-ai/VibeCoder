@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>글 쓰기 — VibeCoder 라운지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#050508;--surface:#0d0d14;--surface2:#13131e;--border:rgba(255,255,255,.07);
+      --accent:#7c3aed;--accent2:#06b6d4;--text:#f1f5f9;--muted:#64748b;--radius:14px;
+      --input-bg:#0d0d14;--input-border:rgba(255,255,255,.08);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.06;animation:orbFloat 20s ease-in-out infinite;}
+    .orb:nth-child(1){width:400px;height:400px;background:radial-gradient(circle,#06b6d4,transparent);top:-100px;right:10%;}
+    .orb:nth-child(2){width:300px;height:300px;background:radial-gradient(circle,#7c3aed,transparent);bottom:10%;left:5%;animation-delay:-8s;}
+    @keyframes orbFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-30px);}}
+    .content{position:relative;z-index:1;}
+
+    header{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+    nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;height:64px;padding:0 24px;}
+    .logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;margin-right:auto;}
+    nav a{color:var(--muted);text-decoration:none;font-size:.9rem;padding:8px 14px;border-radius:8px;transition:all .2s;}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.05);}
+
+    main{max-width:760px;margin:0 auto;padding:60px 24px;}
+    .form-card{background:linear-gradient(145deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:20px;padding:40px;}
+
+    h1{font-size:1.8rem;font-weight:800;margin-bottom:8px;}
+    .subtitle{color:var(--muted);font-size:.9rem;margin-bottom:36px;}
+
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .form-group{margin-bottom:24px;}
+    label{display:block;font-size:.82rem;font-weight:600;color:#94a3b8;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;}
+    .required::after{content:' *';color:#f87171;}
+    input,select,textarea{
+      width:100%;background:var(--input-bg);border:1px solid var(--input-border);
+      color:var(--text);padding:12px 16px;border-radius:10px;font-size:.9rem;
+      font-family:'Inter',sans-serif;outline:none;transition:border .2s;
+      -webkit-appearance:none;
+    }
+    input:focus,select:focus,textarea:focus{border-color:rgba(6,182,212,.4);box-shadow:0 0 0 3px rgba(6,182,212,.06);}
+    textarea{resize:vertical;min-height:200px;line-height:1.7;}
+    select option{background:#0d0d14;}
+    ::placeholder{color:var(--muted);}
+
+    .hint{font-size:.78rem;color:var(--muted);margin-top:6px;}
+    .char-count{font-size:.75rem;color:var(--muted);text-align:right;margin-top:4px;}
+    .char-count.ok{color:#4ade80;}
+
+    /* 익명 안내 */
+    .anon-box{background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.15);
+      border-radius:10px;padding:16px 20px;margin-bottom:28px;font-size:.85rem;color:#94a3b8;line-height:1.6;}
+    .anon-box strong{color:#22d3ee;}
+
+    /* 카테고리 선택 */
+    .cat-select{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;}
+    .cat-option{position:relative;}
+    .cat-option input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
+    .cat-option label{
+      display:flex;flex-direction:column;align-items:center;gap:4px;
+      padding:10px;border-radius:10px;border:1px solid var(--border);cursor:pointer;
+      font-size:.78rem;font-weight:600;text-transform:none;letter-spacing:0;
+      color:var(--muted);background:var(--surface);transition:all .2s;
+    }
+    .cat-option label .icon{font-size:1.3rem;}
+    .cat-option input[type=radio]:checked+label{
+      background:rgba(6,182,212,.12);border-color:rgba(6,182,212,.35);color:#22d3ee;
+    }
+    .cat-option label:hover{background:rgba(255,255,255,.04);}
+
+    .error-msg{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);
+      color:#fca5a5;padding:12px 16px;border-radius:10px;font-size:.88rem;margin-bottom:24px;}
+
+    .form-actions{display:flex;gap:12px;margin-top:8px;}
+    .btn-submit{flex:1;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;
+      border:none;padding:14px;border-radius:10px;font-size:1rem;font-weight:700;
+      cursor:pointer;font-family:'Inter',sans-serif;transition:all .25s;
+      box-shadow:0 4px 20px rgba(6,182,212,.3);}
+    .btn-submit:hover{box-shadow:0 6px 28px rgba(6,182,212,.5);transform:translateY(-1px);}
+    .btn-cancel{padding:14px 24px;border-radius:10px;border:1px solid var(--border);
+      background:transparent;color:var(--muted);font-size:.9rem;cursor:pointer;
+      font-family:'Inter',sans-serif;text-decoration:none;display:flex;align-items:center;}
+
+    @media(max-width:640px){.form-row{grid-template-columns:1fr;}.cat-select{grid-template-columns:repeat(2,1fr);}
+      nav a:not(.logo){display:none;}.form-card{padding:24px;}}
+  </style>
+</head>
+<body>
+<div class="bg-orbs"><div class="orb"></div><div class="orb"></div></div>
+<div class="content">
+
+<header>
+  <nav>
+    <a href="/" class="logo">⚡ VibeCoder</a>
+    <a href="/showcase">쇼케이스</a>
+    <a href="/lounge">라운지</a>
+  </nav>
+</header>
+
+<main>
+  <div class="form-card">
+    <h1>✏️ 글 쓰기</h1>
+    <p class="subtitle">코더스 라운지에 자유롭게 글을 남겨보세요</p>
+
+    <div class="anon-box">
+      <strong>🔒 가입 없이 참여</strong><br/>
+      닉네임과 비밀번호만 입력하면 됩니다. 비밀번호는 나중에 본인 글을 수정/삭제할 때만 사용됩니다.
+    </div>
+
+    {% if error %}
+    <div class="error-msg">⚠️ {{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/lounge/write">
+
+      <!-- 카테고리 -->
+      <div class="form-group">
+        <label class="required">카테고리</label>
+        <div class="cat-select">
+          <div class="cat-option">
+            <input type="radio" name="category" id="cat-tip" value="tip" checked/>
+            <label for="cat-tip"><span class="icon">💡</span>꿀팁</label>
+          </div>
+          <div class="cat-option">
+            <input type="radio" name="category" id="cat-qna" value="qna"/>
+            <label for="cat-qna"><span class="icon">❓</span>Q&A</label>
+          </div>
+          <div class="cat-option">
+            <input type="radio" name="category" id="cat-showcase" value="showcase"/>
+            <label for="cat-showcase"><span class="icon">🎨</span>쇼케이스</label>
+          </div>
+          <div class="cat-option">
+            <input type="radio" name="category" id="cat-free" value="free"/>
+            <label for="cat-free"><span class="icon">💬</span>자유</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 제목 -->
+      <div class="form-group">
+        <label for="title" class="required">제목</label>
+        <input type="text" id="title" name="title" required maxlength="100"
+               placeholder="어떤 이야기를 나누고 싶으신가요?"
+               oninput="countChars(this,'title-count',100)"/>
+        <div class="char-count" id="title-count">0/100</div>
+      </div>
+
+      <!-- 내용 -->
+      <div class="form-group">
+        <label for="content" class="required">내용</label>
+        <textarea id="content" name="content" required
+                  placeholder="Claude 프롬프트 꿀팁, 배포 삽질기, 만든 프로젝트 자랑, 뭐든 괜찮아요!"
+                  oninput="countChars(this,'content-count',0)"></textarea>
+        <div class="char-count" id="content-count">0자</div>
+      </div>
+
+      <!-- 닉네임 + 비밀번호 -->
+      <div class="form-row">
+        <div class="form-group" style="margin:0">
+          <label for="author">닉네임</label>
+          <input type="text" id="author" name="author" maxlength="30" placeholder="익명코더"/>
+          <p class="hint">공백이면 '익명코더'로 표시</p>
+        </div>
+        <div class="form-group" style="margin:0">
+          <label for="password">비밀번호 (선택)</label>
+          <input type="password" id="password" name="password" maxlength="50" placeholder="나중에 수정/삭제용"/>
+          <p class="hint">입력 안 해도 되나, 나중에 삭제 불가</p>
+        </div>
+      </div>
+
+      <!-- 태그 -->
+      <div class="form-group" style="margin-top:24px">
+        <label for="tags">태그 (선택)</label>
+        <input type="text" id="tags" name="tags" placeholder="Claude, Cursor, 파이썬, 배포" maxlength="100"/>
+        <p class="hint">쉼표로 구분</p>
+      </div>
+
+      <div class="form-actions" style="margin-top:32px">
+        <a href="/lounge" class="btn-cancel">취소</a>
+        <button type="submit" class="btn-submit">게시하기 →</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+</div>
+<script>
+function countChars(el, countId, max){
+  const len=el.value.length;
+  const el2=document.getElementById(countId);
+  el2.textContent=max?`${len}/${max}`:`${len}자`;
+  el2.className='char-count'+(len>10?' ok':'');
+}
+</script>
+</body>
+</html>
