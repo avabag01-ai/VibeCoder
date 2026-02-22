@@ -412,6 +412,10 @@
     <div class="stat-label">커뮤니티 글</div>
   </div>
   <div class="stat-item">
+    <div class="stat-num" id="stat-days">–</div>
+    <div class="stat-label">⚡ 바이브코딩 시작 D+</div>
+  </div>
+  <div class="stat-item">
     <div class="stat-num">∞</div>
     <div class="stat-label">가능성</div>
   </div>
@@ -644,6 +648,16 @@ window.addEventListener('load',()=>{
   const lEl = document.getElementById('stat-posts');
   if(pEl) countUp(pEl, parseInt(pEl.textContent)||0);
   if(lEl) countUp(lEl, parseInt(lEl.textContent)||0);
+
+  /* ── 바이브코딩 D+ 카운터 ── */
+  const dEl = document.getElementById('stat-days');
+  if(dEl){
+    const start = new Date('2026-01-01');
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const days = Math.floor((today - start) / 86400000) + 1;
+    countUp(dEl, days);
+  }
 });
 </script>
 
