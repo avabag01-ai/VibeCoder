@@ -190,6 +190,7 @@ def index():
             except Exception:
                 proj["tech_stack"] = []
 
+    record_pageview("/")
     return render_template("index.html",
         featured=featured,
         latest_posts=latest_posts,
@@ -228,6 +229,7 @@ def showcase():
             except Exception:
                 proj["tech_stack"] = []
 
+    record_pageview("/showcase")
     return render_template("showcase.html",
         projects=projects,
         page=page,
@@ -373,6 +375,7 @@ def lounge():
 
     session_token = request.cookies.get("vc_session", "")
 
+    record_pageview("/lounge")
     return render_template("lounge.html",
         posts=posts,
         page=page,
@@ -590,6 +593,162 @@ def delete_comment(comment_id):
 
     conn.close()
     return redirect(redirect_url)
+
+
+# ──────────────────────────────────────────────────────────
+# 방문자 통계 기록
+# ──────────────────────────────────────────────────────────
+import hashlib as _hl
+
+def record_pageview(path: str):
+    """페이지뷰 기록 (IP는 해시 처리, 개인정보 보호)"""
+    try:
+        ip = get_client_ip()
+        ip_hash = _hl.md5(ip.encode()).hexdigest()[:12]  # 비식별화
+        ua = request.headers.get("User-Agent", "")[:200]
+        ref = request.headers.get("Referer", "")[:200]
+        # Accept-Language로 국가 힌트
+        al = request.headers.get("Accept-Language", "")
+        country_hint = al.split(",")[0].split(";")[0].strip()[:10] if al else ""
+        conn = get_conn()
+        c = conn.cursor()
+        p = ph()
+        c.execute(
+            f"INSERT INTO page_views (created_at, path, ip_hash, referrer, user_agent, country_hint) VALUES ({p},{p},{p},{p},{p},{p})",
+            (datetime.now().isoformat(), path, ip_hash, ref, ua, country_hint)
+        )
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass  # 통계 실패해도 페이지는 정상 동작
+
+
+# ──────────────────────────────────────────────────────────
+# 관리자 대시보드 /admin
+# ──────────────────────────────────────────────────────────
+ADMIN_KEY = os.environ.get("ADMIN_KEY", "vibecoder-admin-2026")
+
+@app.route("/admin")
+def admin_dashboard():
+    if request.args.get("key") != ADMIN_KEY:
+        return "401 Unauthorized", 401
+
+    conn = get_conn()
+    c = conn.cursor()
+    p = ph()
+
+    # 총 방문자 (unique ip_hash 기준)
+    c.execute("SELECT COUNT(*) as cnt FROM page_views")
+    total_pv = fetchone(c)["cnt"]
+
+    c.execute("SELECT COUNT(DISTINCT ip_hash) as cnt FROM page_views")
+    unique_visitors = fetchone(c)["cnt"]
+
+    # 오늘 방문자
+    today = datetime.now().strftime("%Y-%m-%d")
+    c.execute(f"SELECT COUNT(*) as cnt FROM page_views WHERE created_at LIKE {p}", (f"{today}%",))
+    today_pv = fetchone(c)["cnt"]
+
+    c.execute(f"SELECT COUNT(DISTINCT ip_hash) as cnt FROM page_views WHERE created_at LIKE {p}", (f"{today}%",))
+    today_uv = fetchone(c)["cnt"]
+
+    # 최근 7일 일별 방문
+    daily = []
+    for i in range(6, -1, -1):
+        from datetime import timedelta
+        d = (datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d")
+        c.execute(f"SELECT COUNT(*) as cnt FROM page_views WHERE created_at LIKE {p}", (f"{d}%",))
+        daily.append({"date": d, "pv": fetchone(c)["cnt"]})
+
+    # 인기 페이지 TOP 10
+    c.execute("SELECT path, COUNT(*) as cnt FROM page_views GROUP BY path ORDER BY cnt DESC LIMIT 10")
+    top_pages = fetchall(c)
+
+    # 유입 경로 TOP 5
+    c.execute("SELECT referrer, COUNT(*) as cnt FROM page_views WHERE referrer != '' GROUP BY referrer ORDER BY cnt DESC LIMIT 5")
+    top_refs = fetchall(c)
+
+    # 국가별 (Accept-Language 기반)
+    c.execute("SELECT country_hint, COUNT(*) as cnt FROM page_views WHERE country_hint != '' GROUP BY country_hint ORDER BY cnt DESC LIMIT 8")
+    top_countries = fetchall(c)
+
+    # 콘텐츠 통계
+    c.execute("SELECT COUNT(*) as cnt FROM projects")
+    proj_cnt = fetchone(c)["cnt"]
+    c.execute("SELECT COUNT(*) as cnt FROM posts WHERE is_deleted=0 AND is_spam=0")
+    post_cnt = fetchone(c)["cnt"]
+    c.execute("SELECT COUNT(*) as cnt FROM comments WHERE is_deleted=0")
+    comment_cnt = fetchone(c)["cnt"]
+
+    conn.close()
+
+    html = f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>VibeCoder 관리자 대시보드</title>
+<style>
+  body{{font-family:system-ui,sans-serif;background:#050508;color:#f1f5f9;margin:0;padding:24px}}
+  h1{{color:#a78bfa;margin-bottom:8px}}
+  .sub{{color:#64748b;font-size:.85rem;margin-bottom:32px}}
+  .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px}}
+  .card{{background:#0d0d14;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px}}
+  .card .num{{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
+  .card .label{{font-size:.8rem;color:#64748b;margin-top:4px}}
+  table{{width:100%;border-collapse:collapse;background:#0d0d14;border-radius:12px;overflow:hidden}}
+  th{{background:#13131e;padding:10px 14px;text-align:left;font-size:.8rem;color:#64748b}}
+  td{{padding:10px 14px;border-top:1px solid rgba(255,255,255,.04);font-size:.88rem}}
+  .section{{margin-bottom:32px}}
+  h2{{font-size:1rem;color:#a78bfa;margin-bottom:12px}}
+  .bar-wrap{{background:#13131e;border-radius:4px;height:8px;margin-top:4px}}
+  .bar{{background:linear-gradient(90deg,#7c3aed,#06b6d4);height:8px;border-radius:4px}}
+  a{{color:#06b6d4}}
+</style>
+</head>
+<body>
+<h1>⚡ VibeCoder 관리자</h1>
+<div class="sub">방문자 통계 대시보드 · 오늘 {today}</div>
+
+<div class="grid">
+  <div class="card"><div class="num">{today_uv}</div><div class="label">오늘 순방문자</div></div>
+  <div class="card"><div class="num">{today_pv}</div><div class="label">오늘 페이지뷰</div></div>
+  <div class="card"><div class="num">{unique_visitors}</div><div class="label">누적 순방문자</div></div>
+  <div class="card"><div class="num">{total_pv}</div><div class="label">누적 페이지뷰</div></div>
+  <div class="card"><div class="num">{proj_cnt}</div><div class="label">등록 프로젝트</div></div>
+  <div class="card"><div class="num">{post_cnt}</div><div class="label">라운지 글</div></div>
+  <div class="card"><div class="num">{comment_cnt}</div><div class="label">댓글</div></div>
+</div>
+
+<div class="section">
+  <h2>📅 최근 7일 일별 페이지뷰</h2>
+  <table><tr>{''.join(f'<th>{d["date"][5:]}</th>' for d in daily)}</tr>
+  <tr>{''.join(f'<td>{d["pv"]}</td>' for d in daily)}</tr></table>
+</div>
+
+<div class="section">
+  <h2>📄 인기 페이지 TOP 10</h2>
+  <table><tr><th>경로</th><th>조회수</th></tr>
+  {''.join(f'<tr><td>{r["path"]}</td><td>{r["cnt"]}</td></tr>' for r in top_pages)}
+  </table>
+</div>
+
+<div class="section">
+  <h2>🌍 언어/국가별 방문</h2>
+  <table><tr><th>언어</th><th>방문수</th></tr>
+  {''.join(f'<tr><td>{r["country_hint"]}</td><td>{r["cnt"]}</td></tr>' for r in top_countries)}
+  </table>
+</div>
+
+<div class="section">
+  <h2>🔗 유입 경로 TOP 5</h2>
+  <table><tr><th>Referrer</th><th>수</th></tr>
+  {''.join(f'<tr><td style="word-break:break-all;max-width:400px">{r["referrer"][:80]}</td><td>{r["cnt"]}</td></tr>' for r in top_refs)}
+  </table>
+</div>
+
+<p style="color:#64748b;font-size:.8rem">IP는 MD5 해시로 비식별화 저장됩니다.</p>
+</body></html>"""
+    return html
 
 
 # ──────────────────────────────────────────────────────────

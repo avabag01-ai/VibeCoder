@@ -126,6 +126,19 @@ def init_db():
         )
     """)
 
+    # ── 방문자 통계 테이블 ──
+    c.execute(f"""
+        CREATE TABLE IF NOT EXISTS page_views (
+            id {PK},
+            created_at TEXT NOT NULL,
+            path TEXT NOT NULL,
+            ip_hash TEXT,
+            referrer TEXT,
+            user_agent TEXT,
+            country_hint TEXT
+        )
+    """)
+
     conn.commit()
     conn.close()
     print(f"DB 초기화 완료 ({'PostgreSQL' if USE_POSTGRES else 'SQLite'})")
