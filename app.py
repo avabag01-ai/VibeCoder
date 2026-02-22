@@ -10,7 +10,7 @@ import os
 import re
 import json
 import uuid
-import hashlib
+import bcrypt
 from datetime import datetime, timedelta
 from flask import (
     Flask, render_template, request, redirect,
@@ -49,8 +49,22 @@ def slugify(text: str) -> str:
 
 
 def hash_password(raw: str) -> str:
-    """간단 sha256 해시 (bcrypt 없이 경량으로)"""
-    return hashlib.sha256(raw.encode()).hexdigest()
+    """bcrypt 해시 (cost factor 12)"""
+    return bcrypt.hashpw(raw.encode(), bcrypt.gensalt(rounds=12)).decode()
+
+
+def check_password(raw: str, hashed: str) -> bool:
+    """bcrypt 검증 (구 sha256 fallback 포함)"""
+    if not raw or not hashed:
+        return False
+    # 구 sha256 해시(64자 hex) 호환성 유지
+    if len(hashed) == 64 and all(c in "0123456789abcdef" for c in hashed):
+        import hashlib
+        return hashlib.sha256(raw.encode()).hexdigest() == hashed
+    try:
+        return bcrypt.checkpw(raw.encode(), hashed.encode())
+    except Exception:
+        return False
 
 
 def get_session_token(resp=None):
@@ -487,11 +501,10 @@ def post_delete(slug):
 
     session_token = request.cookies.get("vc_session", "")
     password = request.form.get("password", "")
-    pw_hash = hash_password(password) if password else None
 
     can_delete = (
         (session_token and session_token == post.get("session_token")) or
-        (pw_hash and pw_hash == post.get("password_hash"))
+        check_password(password, post.get("password_hash") or "")
     )
 
     if can_delete:
@@ -564,12 +577,11 @@ def delete_comment(comment_id):
 
     session_token = request.cookies.get("vc_session", "")
     password = request.form.get("password", "")
-    pw_hash = hash_password(password) if password else None
     redirect_url = request.form.get("redirect_url", "/")
 
     can_delete = (
         (session_token and session_token == comment.get("session_token")) or
-        (pw_hash and pw_hash == comment.get("password_hash"))
+        check_password(password, comment.get("password_hash") or "")
     )
 
     if can_delete:
