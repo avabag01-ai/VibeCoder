@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>바이브코더 툴 허브 — VibeCoder | AI 코딩 툴 모음</title>
+  <meta name="description" content="바이브코더들이 실제로 쓰는 AI 코딩 툴 모음. Claude, ChatGPT, Cursor, Bolt, Replit, Lovable 등 비개발자도 바로 쓸 수 있는 툴 정리."/>
+  <meta name="keywords" content="바이브코딩 툴, Claude, Cursor, ChatGPT, Bolt, Replit, Lovable, v0, AI 코딩, 노코드, 바이브코더"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="바이브코더 툴 허브 — VibeCoder"/>
+  <meta property="og:description" content="바이브코더들이 실제로 쓰는 AI 툴 완전 정리. 입문자부터 고수까지."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#050508;--surface:#0d0d14;--surface2:#13131e;--border:rgba(255,255,255,.06);
+      --accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#f1f5f9;--muted:#64748b;--radius:14px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    header{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+    nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;height:64px}
+    .logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;margin-right:auto}
+    nav a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+    .nav-cta{background:linear-gradient(135deg,#7c3aed,#5b21b6)!important;color:#fff!important;padding:8px 18px!important}
+
+    .hero{text-align:center;padding:80px 24px 48px;max-width:800px;margin:0 auto}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:#fbbf24;padding:6px 16px;border-radius:100px;font-size:.82rem;font-weight:600;margin-bottom:24px}
+    .hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.03em;margin-bottom:16px;background:linear-gradient(135deg,#fff 0%,#94a3b8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{color:var(--muted);font-size:1.05rem;line-height:1.7}
+
+    main{max-width:1200px;margin:0 auto;padding:0 24px 80px}
+
+    .section-title{font-size:1.3rem;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+    .section-title .cat-badge{font-size:.72rem;padding:3px 10px;border-radius:100px;font-weight:600}
+    .cat-ai{background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.2)}
+    .cat-deploy{background:rgba(6,182,212,.15);color:#22d3ee;border:1px solid rgba(6,182,212,.2)}
+    .cat-auto{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+    .cat-design{background:rgba(236,72,153,.15);color:#f472b6;border:1px solid rgba(236,72,153,.2)}
+    .cat-data{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2)}
+
+    .tools-section{margin-bottom:56px}
+    .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+
+    .tool-card{background:linear-gradient(145deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-decoration:none;color:inherit;display:block;transition:all .25s;position:relative;overflow:hidden}
+    .tool-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(124,58,237,.1),transparent 60%);opacity:0;transition:opacity .3s}
+    .tool-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.35);box-shadow:0 8px 32px rgba(124,58,237,.1)}
+    .tool-card:hover::before{opacity:1}
+
+    .tool-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+    .tool-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(--border)}
+    .tool-name{font-size:1rem;font-weight:700}
+    .tool-price{font-size:.72rem;padding:2px 8px;border-radius:100px;margin-top:3px;display:inline-block}
+    .free{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2)}
+    .freemium{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+    .paid{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+
+    .tool-desc{font-size:.87rem;color:var(--muted);line-height:1.6;margin-bottom:14px}
+    .tool-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .tag{background:rgba(124,58,237,.1);color:#a78bfa;border:1px solid rgba(124,58,237,.15);font-size:.7rem;padding:2px 8px;border-radius:100px}
+    .tool-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border)}
+    .tool-link{font-size:.8rem;color:var(--accent2);text-decoration:none;font-weight:500}
+    .tool-link:hover{text-decoration:underline}
+    .rating{font-size:.8rem;color:var(--muted)}
+
+    .tip-box{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.05));border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:20px 24px;margin-bottom:40px;font-size:.9rem;line-height:1.7;color:#cbd5e1}
+    .tip-box strong{color:#a78bfa}
+
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--muted);font-size:.85rem}
+    footer a{color:var(--muted)}
+    .footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:12px}
+
+    @media(max-width:640px){nav a:not(.nav-cta):not(.logo){display:none}.tools-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="/" class="logo">⚡ VibeCoder</a>
+    <a href="/showcase">쇼케이스</a>
+    <a href="/lounge">라운지</a>
+    <a href="/tools" style="color:var(--text)">툴 허브</a>
+    <a href="/submit" class="nav-cta">프로젝트 올리기</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">🔧 바이브코더 픽</div>
+  <h1>바이브코딩 툴 허브</h1>
+  <p>비개발자가 앱을 만들 수 있게 해준 툴들. 실제로 써본 것만 정리함.</p>
+</div>
+
+<main>
+
+  <div class="tip-box">
+    💡 <strong>바이브코딩 스택 추천</strong> — 처음이라면: <strong>Claude</strong>(기획·코드) + <strong>Cursor</strong>(에디터) + <strong>GitHub</strong>(저장) + <strong>Render/Vercel</strong>(배포). 이 4개면 웬만한 건 다 됨.
+  </div>
+
+  <!-- AI 코딩 어시스턴트 -->
+  <div class="tools-section">
+    <div class="section-title">🤖 AI 코딩 어시스턴트 <span class="cat-badge cat-ai">핵심</span></div>
+    <div class="tools-grid">
+
+      <a href="https://claude.ai" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🟠</div>
+          <div>
+            <div class="tool-name">Claude (Anthropic)</div>
+            <span class="tool-price freemium">무료/Pro $20</span>
+          </div>
+        </div>
+        <div class="tool-desc">바이브코딩의 핵심. 코드 생성, 디버깅, 설계까지. 긴 컨텍스트와 코드 이해력이 GPT-4보다 낫다는 평가. Projects 기능으로 프로젝트별 맥락 유지 가능.</div>
+        <div class="tool-tags"><span class="tag">코드생성</span><span class="tag">디버깅</span><span class="tag">설계</span><span class="tag">Projects</span></div>
+        <div class="tool-footer"><span class="tool-link">claude.ai →</span><span class="rating">⭐ 바이브코더 1픽</span></div>
+      </a>
+
+      <a href="https://cursor.sh" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">⬛</div>
+          <div>
+            <div class="tool-name">Cursor</div>
+            <span class="tool-price freemium">무료/Pro $20</span>
+          </div>
+        </div>
+        <div class="tool-desc">VSCode 기반 AI 코드 에디터. 파일 전체를 AI가 이해하고 수정해줌. Tab 자동완성이 손 가는 횟수를 절반으로 줄여줌. 바이브코더 필수 에디터.</div>
+        <div class="tool-tags"><span class="tag">에디터</span><span class="tag">자동완성</span><span class="tag">Composer</span><span class="tag">VSCode호환</span></div>
+        <div class="tool-footer"><span class="tool-link">cursor.sh →</span><span class="rating">⭐ 에디터 1픽</span></div>
+      </a>
+
+      <a href="https://chat.openai.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🟢</div>
+          <div>
+            <div class="tool-name">ChatGPT (OpenAI)</div>
+            <span class="tool-price freemium">무료/Plus $20</span>
+          </div>
+        </div>
+        <div class="tool-desc">가장 유명한 AI. GPT-4o로 코드·이미지·파일 다 됨. 플러그인 생태계가 넓고 레퍼런스가 많아서 막혔을 때 구글링하면 답 찾기 쉬움.</div>
+        <div class="tool-tags"><span class="tag">코드생성</span><span class="tag">이미지</span><span class="tag">파일분석</span><span class="tag">GPT-4o</span></div>
+        <div class="tool-footer"><span class="tool-link">chat.openai.com →</span><span class="rating">범용성 최강</span></div>
+      </a>
+
+      <a href="https://gemini.google.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🔵</div>
+          <div>
+            <div class="tool-name">Gemini (Google)</div>
+            <span class="tool-price freemium">무료/Advanced</span>
+          </div>
+        </div>
+        <div class="tool-desc">Google 검색 연동이 강점. Gemini 2.0 Flash는 무료로 빠름. Google Docs, Gmail, Drive와 연동되고, Deep Research 기능으로 조사 자동화 가능.</div>
+        <div class="tool-tags"><span class="tag">검색연동</span><span class="tag">구글연동</span><span class="tag">무료강력</span><span class="tag">멀티모달</span></div>
+        <div class="tool-footer"><span class="tool-link">gemini.google.com →</span><span class="rating">구글 생태계 유저 픽</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 풀스택 빌더 -->
+  <div class="tools-section">
+    <div class="section-title">⚡ 풀스택 원클릭 빌더 <span class="cat-badge cat-deploy">빠른시작</span></div>
+    <div class="tools-grid">
+
+      <a href="https://bolt.new" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">⚡</div>
+          <div>
+            <div class="tool-name">Bolt.new</div>
+            <span class="tool-price freemium">무료 크레딧/Pro</span>
+          </div>
+        </div>
+        <div class="tool-desc">프롬프트 하나로 풀스택 앱 즉시 생성. 브라우저에서 바로 실행·배포까지. React, Node.js, 데이터베이스 다 됨. 비개발자가 아이디어 검증할 때 최고.</div>
+        <div class="tool-tags"><span class="tag">원클릭생성</span><span class="tag">React</span><span class="tag">즉시배포</span><span class="tag">풀스택</span></div>
+        <div class="tool-footer"><span class="tool-link">bolt.new →</span><span class="rating">⭐ 속도 1픽</span></div>
+      </a>
+
+      <a href="https://lovable.dev" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">💜</div>
+          <div>
+            <div class="tool-name">Lovable</div>
+            <span class="tool-price freemium">무료/Pro $25</span>
+          </div>
+        </div>
+        <div class="tool-desc">대화형으로 웹앱 만드는 도구. Supabase 연동으로 DB까지 자동 설정. GitHub에 코드 내보내기 가능. UI가 예쁘게 나와서 데모·MVP에 딱.</div>
+        <div class="tool-tags"><span class="tag">대화형빌더</span><span class="tag">Supabase</span><span class="tag">MVP</span><span class="tag">UI예쁨</span></div>
+        <div class="tool-footer"><span class="tool-link">lovable.dev →</span><span class="rating">UI/UX 중요한 분 픽</span></div>
+      </a>
+
+      <a href="https://v0.dev" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🔲</div>
+          <div>
+            <div class="tool-name">v0 (Vercel)</div>
+            <span class="tool-price freemium">무료 크레딧</span>
+          </div>
+        </div>
+        <div class="tool-desc">UI 컴포넌트 생성 특화. Shadcn/ui 기반으로 퀄리티 높은 React 컴포넌트 즉시 생성. 디자인 퀄리티가 타 툴 압도. Vercel 배포와 연동.</div>
+        <div class="tool-tags"><span class="tag">UI컴포넌트</span><span class="tag">React</span><span class="tag">Shadcn</span><span class="tag">Vercel</span></div>
+        <div class="tool-footer"><span class="tool-link">v0.dev →</span><span class="rating">프론트엔드 픽</span></div>
+      </a>
+
+      <a href="https://replit.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🟡</div>
+          <div>
+            <div class="tool-name">Replit</div>
+            <span class="tool-price freemium">무료/Core $25</span>
+          </div>
+        </div>
+        <div class="tool-desc">브라우저 기반 개발환경 + AI 어시스턴트. 설치 없이 바로 코딩 시작. 다양한 언어 지원. 팀 협업에도 좋고, 학습용으로도 최고.</div>
+        <div class="tool-tags"><span class="tag">브라우저IDE</span><span class="tag">협업</span><span class="tag">학습</span><span class="tag">다언어</span></div>
+        <div class="tool-footer"><span class="tool-link">replit.com →</span><span class="rating">협업/학습 픽</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 배포 -->
+  <div class="tools-section">
+    <div class="section-title">🚀 배포 & 호스팅 <span class="cat-badge cat-deploy">배포</span></div>
+    <div class="tools-grid">
+
+      <a href="https://vercel.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">▲</div>
+          <div>
+            <div class="tool-name">Vercel</div>
+            <span class="tool-price free">무료 플랜 있음</span>
+          </div>
+        </div>
+        <div class="tool-desc">프론트엔드 배포 1픽. GitHub 연결하면 push할 때마다 자동 배포. Next.js와 궁합 최고. 도메인 연결, SSL 자동. 무료 플랜으로도 충분.</div>
+        <div class="tool-tags"><span class="tag">자동배포</span><span class="tag">Next.js</span><span class="tag">CDN</span><span class="tag">무료SSL</span></div>
+        <div class="tool-footer"><span class="tool-link">vercel.com →</span><span class="rating">⭐ 프론트 배포 1픽</span></div>
+      </a>
+
+      <a href="https://render.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🟣</div>
+          <div>
+            <div class="tool-name">Render</div>
+            <span class="tool-price free">무료 플랜 있음</span>
+          </div>
+        </div>
+        <div class="tool-desc">Flask, FastAPI, Node 백엔드 배포에 최적. 무료 Web Service 1개. DB도 무료로 붙일 수 있음. GitHub 연결하면 자동 배포. 국내 바이브코더 많이 씀.</div>
+        <div class="tool-tags"><span class="tag">백엔드</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span><span class="tag">무료1개</span></div>
+        <div class="tool-footer"><span class="tool-link">render.com →</span><span class="rating">백엔드 무료 픽</span></div>
+      </a>
+
+      <a href="https://cloud.google.com/run" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">☁️</div>
+          <div>
+            <div class="tool-name">Google Cloud Run</div>
+            <span class="tool-price free">무료 티어 있음</span>
+          </div>
+        </div>
+        <div class="tool-desc">컨테이너 기반 서버리스. 월 180만 vCPU초 + 200만 요청 무료. 트래픽 없으면 비용 0. Docker + GitHub Actions로 완전 자동화 가능. 이 사이트가 여기서 돌아감.</div>
+        <div class="tool-tags"><span class="tag">서버리스</span><span class="tag">Docker</span><span class="tag">무료티어</span><span class="tag">서울리전</span></div>
+        <div class="tool-footer"><span class="tool-link">cloud.google.com/run →</span><span class="rating">VibeCoder 사용 중</span></div>
+      </a>
+
+      <a href="https://netlify.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🟦</div>
+          <div>
+            <div class="tool-name">Netlify</div>
+            <span class="tool-price free">무료 플랜 있음</span>
+          </div>
+        </div>
+        <div class="tool-desc">정적 사이트 배포의 왕. HTML/CSS/JS만 있어도 바로 배포. 폼 처리, Functions까지 지원. Vercel과 비슷하지만 정적 사이트엔 더 단순.</div>
+        <div class="tool-tags"><span class="tag">정적사이트</span><span class="tag">Forms</span><span class="tag">Functions</span><span class="tag">CDN</span></div>
+        <div class="tool-footer"><span class="tool-link">netlify.com →</span><span class="rating">정적 사이트 픽</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 자동화 -->
+  <div class="tools-section">
+    <div class="section-title">⚙️ 자동화 <span class="cat-badge cat-auto">자동화</span></div>
+    <div class="tools-grid">
+
+      <a href="https://github.com/features/actions" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🐙</div>
+          <div>
+            <div class="tool-name">GitHub Actions</div>
+            <span class="tool-price free">무료 (월 2000분)</span>
+          </div>
+        </div>
+        <div class="tool-desc">코드 push하면 자동 테스트·배포. 스케줄 실행으로 크론잡도 가능. SpreadRadar가 매일 이걸로 가격 스캔함. YAML 작성도 Claude한테 시키면 됨.</div>
+        <div class="tool-tags"><span class="tag">CI/CD</span><span class="tag">스케줄실행</span><span class="tag">자동배포</span><span class="tag">무료</span></div>
+        <div class="tool-footer"><span class="tool-link">github.com/features/actions →</span><span class="rating">⭐ 자동화 필수</span></div>
+      </a>
+
+      <a href="https://zapier.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">⚡</div>
+          <div>
+            <div class="tool-name">Zapier</div>
+            <span class="tool-price freemium">무료/Pro $20</span>
+          </div>
+        </div>
+        <div class="tool-desc">노코드 자동화의 표준. Gmail → Notion, Slack → Google Sheets 같은 앱 연결을 드래그앤드롭으로. 7000개 이상 앱 지원. 코드 없이 업무 자동화.</div>
+        <div class="tool-tags"><span class="tag">노코드자동화</span><span class="tag">앱연결</span><span class="tag">트리거</span><span class="tag">7000앱</span></div>
+        <div class="tool-footer"><span class="tool-link">zapier.com →</span><span class="rating">노코드 자동화 1픽</span></div>
+      </a>
+
+      <a href="https://make.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🔀</div>
+          <div>
+            <div class="tool-name">Make (구 Integromat)</div>
+            <span class="tool-price free">무료 플랜 있음</span>
+          </div>
+        </div>
+        <div class="tool-desc">Zapier보다 복잡한 자동화 가능. 시각적 플로우 편집기. 무료 플랜이 더 넉넉함. HTTP 모듈로 어떤 API도 연결 가능. 고급 자동화엔 Make.</div>
+        <div class="tool-tags"><span class="tag">시각적플로우</span><span class="tag">복잡자동화</span><span class="tag">API연결</span><span class="tag">무료넉넉</span></div>
+        <div class="tool-footer"><span class="tool-link">make.com →</span><span class="rating">고급 자동화 픽</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 디자인/UI -->
+  <div class="tools-section">
+    <div class="section-title">🎨 디자인 & UI <span class="cat-badge cat-design">디자인</span></div>
+    <div class="tools-grid">
+
+      <a href="https://www.figma.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🎨</div>
+          <div>
+            <div class="tool-name">Figma</div>
+            <span class="tool-price freemium">무료/Pro</span>
+          </div>
+        </div>
+        <div class="tool-desc">UI 디자인의 표준. AI 기능 추가로 레이아웃 자동 생성까지. Dev Mode로 코드 추출 가능. 무료 플랜으로도 웬만한 작업 가능. 팀 협업 최강.</div>
+        <div class="tool-tags"><span class="tag">UI디자인</span><span class="tag">프로토타입</span><span class="tag">협업</span><span class="tag">AI기능</span></div>
+        <div class="tool-footer"><span class="tool-link">figma.com →</span><span class="rating">디자인 표준</span></div>
+      </a>
+
+      <a href="https://www.canva.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🖌️</div>
+          <div>
+            <div class="tool-name">Canva</div>
+            <span class="tool-price freemium">무료/Pro</span>
+          </div>
+        </div>
+        <div class="tool-desc">비디자이너용 그래픽 툴. 썸네일, 배너, OG 이미지 10분 완성. AI 이미지 생성, Magic Resize. 프로젝트 홍보 이미지 만들 때 필수.</div>
+        <div class="tool-tags"><span class="tag">썸네일</span><span class="tag">배너</span><span class="tag">AI이미지</span><span class="tag">비디자이너</span></div>
+        <div class="tool-footer"><span class="tool-link">canva.com →</span><span class="rating">홍보 이미지 픽</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 데이터/DB -->
+  <div class="tools-section">
+    <div class="section-title">🗃️ 데이터 & DB <span class="cat-badge cat-data">데이터</span></div>
+    <div class="tools-grid">
+
+      <a href="https://supabase.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">⚡</div>
+          <div>
+            <div class="tool-name">Supabase</div>
+            <span class="tool-price free">무료 플랜 있음</span>
+          </div>
+        </div>
+        <div class="tool-desc">오픈소스 Firebase 대체제. PostgreSQL 기반 DB + 인증 + 스토리지 + 실시간 구독. 무료 플랜으로 풀스택 앱 가능. Lovable과 연동 최강.</div>
+        <div class="tool-tags"><span class="tag">PostgreSQL</span><span class="tag">인증</span><span class="tag">실시간</span><span class="tag">무료</span></div>
+        <div class="tool-footer"><span class="tool-link">supabase.com →</span><span class="rating">⭐ DB 1픽</span></div>
+      </a>
+
+      <a href="https://airtable.com" target="_blank" class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">🟦</div>
+          <div>
+            <div class="tool-name">Airtable</div>
+            <span class="tool-price freemium">무료/Team</span>
+          </div>
+        </div>
+        <div class="tool-desc">스프레드시트처럼 쓰는 DB. 코드 없이 데이터 관리. API 자동 생성. Zapier/Make와 연결하면 데이터 파이프라인 완성. 비코더 데이터 관리 필수.</div>
+        <div class="tool-tags"><span class="tag">노코드DB</span><span class="tag">API자동</span><span class="tag">시각화</span><span class="tag">자동화연동</span></div>
+        <div class="tool-footer"><span class="tool-link">airtable.com →</span><span class="rating">노코드 DB 픽</span></div>
+      </a>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">홈</a>
+    <a href="/showcase">쇼케이스</a>
+    <a href="/lounge">라운지</a>
+    <a href="/submit">프로젝트 올리기</a>
+  </div>
+  <p>© 2026 VibeCoder — 바이브 코더들의 커뮤니티</p>
+</footer>
+
+</body>
+</html>
