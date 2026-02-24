@@ -11,12 +11,66 @@ import re
 import json
 import uuid
 import bcrypt
+import time
+import threading
+import urllib.request
 from datetime import datetime, timedelta
+from xml.etree import ElementTree
 from flask import (
     Flask, render_template, request, redirect,
     url_for, jsonify, abort, make_response
 )
 from dotenv import load_dotenv
+
+# ── AI 뉴스 캐시 (1시간마다 갱신) ──
+_news_cache = {"data": [], "updated": 0}
+_news_lock = threading.Lock()
+
+RSS_FEEDS = [
+    ("TechCrunch AI",   "https://techcrunch.com/category/artificial-intelligence/feed/"),
+    ("The Verge AI",    "https://www.theverge.com/ai-artificial-intelligence/rss/index.xml"),
+    ("VentureBeat AI",  "https://venturebeat.com/category/ai/feed/"),
+    ("MIT Tech Review", "https://www.technologyreview.com/feed/"),
+    ("AI News",         "https://www.artificialintelligence-news.com/feed/"),
+]
+
+def _parse_date(s):
+    if not s: return "최근"
+    try:
+        from email.utils import parsedate_to_datetime
+        dt = parsedate_to_datetime(s)
+        diff = datetime.now(dt.tzinfo) - dt
+        h = int(diff.total_seconds() / 3600)
+        if h < 1: return "방금 전"
+        if h < 24: return f"{h}시간 전"
+        return f"{diff.days}일 전"
+    except: return "최근"
+
+def _fetch_news():
+    items = []
+    for src, url in RSS_FEEDS:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=8) as r:
+                root = ElementTree.fromstring(r.read())
+            for item in root.findall(".//item")[:4]:
+                title = re.sub(r"<[^>]+>", "", item.findtext("title", ""))
+                link  = item.findtext("link", "") or item.findtext("guid", "")
+                date  = _parse_date(item.findtext("pubDate", ""))
+                if title and link:
+                    items.append({"source": src, "title": title[:120], "url": link, "time": date})
+        except: pass
+    return items[:18]
+
+def get_ai_news():
+    """캐시된 AI 뉴스 반환 (1시간 캐시)"""
+    with _news_lock:
+        if time.time() - _news_cache["updated"] > 3600:
+            data = _fetch_news()
+            if data:
+                _news_cache["data"] = data
+                _news_cache["updated"] = time.time()
+        return _news_cache["data"]
 
 load_dotenv()
 
@@ -175,6 +229,9 @@ def index():
     c.execute("SELECT * FROM posts WHERE is_spam=0 AND is_deleted=0 ORDER BY created_at DESC LIMIT 5")
     latest_posts = fetchall(c)
 
+    c.execute("SELECT * FROM posts WHERE category='info' AND is_spam=0 AND is_deleted=0 ORDER BY created_at DESC LIMIT 3")
+    trend_news = fetchall(c)
+
     c.execute("SELECT COUNT(*) as cnt FROM projects")
     project_count = fetchone(c)["cnt"]
 
@@ -190,12 +247,17 @@ def index():
             except Exception:
                 proj["tech_stack"] = []
 
+    # AI 뉴스 (캐시, 1시간 갱신)
+    ai_news = get_ai_news()
+
     record_pageview("/")
     return render_template("index.html",
         featured=featured,
         latest_posts=latest_posts,
+        trend_news=trend_news,
         project_count=project_count,
         post_count=post_count,
+        ai_news=ai_news,
     )
 
 
@@ -236,6 +298,28 @@ def showcase():
         total_pages=(total + per_page - 1) // per_page,
         total=total,
     )
+
+
+@app.route("/trends")
+def trends():
+    conn = get_conn()
+    c = conn.cursor()
+    c.execute(
+        "SELECT * FROM posts WHERE category='info' AND is_spam=0 AND is_deleted=0 ORDER BY created_at DESC LIMIT 20"
+    )
+    news_items = fetchall(c)
+    conn.close()
+
+    ai_news = get_ai_news()
+    record_pageview("/trends")
+    return render_template("trends.html", news_items=news_items, ai_news=ai_news)
+
+
+@app.route("/api/ai-news")
+def api_ai_news():
+    """실시간 AI 뉴스 API (1시간 캐시)"""
+    news = get_ai_news()
+    return jsonify({"ok": True, "news": news, "count": len(news)})
 
 
 @app.route("/showcase/<slug>")

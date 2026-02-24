@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI 트렌드 & 뉴스 — VibeCoder | 바이브코딩 최신 동향</title>
+  <style>
+    :root {
+      --bg: #050508;
+      --surface: #0d0d14;
+      --surface2: #13131e;
+      --border: rgba(255,255,255,.06);
+      --accent: #7c3aed;
+      --accent2: #06b6d4;
+      --text: #f1f5f9;
+      --muted: #64748b;
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(5,5,8,.8); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    nav {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px;
+      height: 64px;
+    }
+    .logo {
+      font-size: 1.4rem; font-weight: 800;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-decoration: none; margin-right: auto;
+    }
+    nav a {
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; font-weight: 500; padding: 8px 14px;
+      border-radius: 8px; transition: all .2s;
+    }
+    nav a:hover { color: var(--text); background: rgba(255,255,255,.05); }
+    .nav-cta {
+      background: linear-gradient(135deg, #7c3aed, #5b21b6) !important;
+      color: #fff !important; padding: 8px 18px !important;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+    .page-header { margin-bottom: 48px; text-align: center; }
+    .page-title {
+      font-size: 2.5rem; font-weight: 800; margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff, var(--muted));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-sub { color: var(--muted); font-size: 1.1rem; }
+
+    .news-grid { display: flex; flex-direction: column; gap: 24px; }
+    .news-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: all .2s;
+    }
+    .news-card:hover { border-color: rgba(124,58,237,.3); transform: translateY(-2px); }
+    .news-meta { font-size: .85rem; color: var(--muted); margin-bottom: 12px; display: flex; gap: 12px; }
+    .news-tag { color: var(--accent2); font-weight: 600; }
+    .news-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+    .news-content { color: #cbd5e1; font-size: 1rem; white-space: pre-wrap; }
+    
+    .empty-state { text-align: center; padding: 100px 0; color: var(--muted); }
+    
+    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; color: var(--muted); font-size: .85rem; margin-top: 80px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="/" class="logo">⚡ VibeCoder</a>
+    <a href="/showcase">쇼케이스</a>
+    <a href="/lounge">라운지</a>
+    <a href="/trends" style="color: var(--text);">트렌드/뉴스</a>
+    <a href="/submit" class="nav-cta">프로젝트 올리기</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="page-header">
+    <h1 class="page-title">AI 트렌드 & 뉴스</h1>
+    <p class="page-sub">바이브 코더들을 위한 실시간 전역 최신 AI 동향 리포트</p>
+  </div>
+
+  <div class="news-grid">
+    {% if news_items %}
+      {% for item in news_items %}
+      <article class="news-card">
+        <div class="news-meta">
+          <span class="news-tag">#TREND</span>
+          <span>{{ item.created_at[:10] }}</span>
+          <span>by {{ item.author_name }}</span>
+        </div>
+        <h2 class="news-title">{{ item.title }}</h2>
+        <div class="news-content">{{ item.content }}</div>
+      </article>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">
+        <p>최신 뉴스를 수집 중입니다. 잠시만 기다려주세요! 📡</p>
+      </div>
+    {% endif %}
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 VibeCoder — AI 자동화 트렌드 센터</p>
+</footer>
+
+</body>
+</html>

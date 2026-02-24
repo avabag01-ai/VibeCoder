@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VibeCoder — 바이브 코더 커뮤니티 | AI 앱 만들기, 바이브코딩, Claude, Cursor</title>
-  <meta name="description" content="바이브코딩으로 AI 앱을 만드는 사람들의 커뮤니티. Claude, ChatGPT, Cursor로 만든 프로젝트를 공유하고 팁을 나누세요. 비개발자도 OK."/>
-  <meta name="keywords" content="바이브코딩, vibe coding, AI 앱 만들기, Claude, ChatGPT, Cursor, 바이브 코더, 비개발자 개발, AI 자동화, 노코드, AI 프로젝트, 바이브코딩 커뮤니티"/>
-  <meta name="author" content="VibeCoder"/>
-  <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://vibecoder-328967213016.asia-northeast3.run.app/"/>
+  <meta name="description"
+    content="바이브코딩으로 AI 앱을 만드는 사람들의 커뮤니티. Claude, ChatGPT, Cursor로 만든 프로젝트를 공유하고 팁을 나누세요. 비개발자도 OK." />
+  <meta name="keywords"
+    content="바이브코딩, vibe coding, AI 앱 만들기, Claude, ChatGPT, Cursor, 바이브 코더, 비개발자 개발, AI 자동화, 노코드, AI 프로젝트, 바이브코딩 커뮤니티" />
+  <meta name="author" content="VibeCoder" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vibecoder-328967213016.asia-northeast3.run.app/" />
 
   <!-- Open Graph (카카오/페이스북/슬랙 링크 공유) -->
-  <meta property="og:title" content="VibeCoder — 바이브 코더 커뮤니티"/>
-  <meta property="og:description" content="Claude, ChatGPT, Cursor로 앱을 만드는 사람들의 집합소. 프로젝트 쇼케이스 · 라운지 · 툴 허브"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://vibecoder-328967213016.asia-northeast3.run.app/"/>
-  <meta property="og:site_name" content="VibeCoder"/>
-  <meta property="og:locale" content="ko_KR"/>
+  <meta property="og:title" content="VibeCoder — 바이브 코더 커뮤니티" />
+  <meta property="og:description" content="Claude, ChatGPT, Cursor로 앱을 만드는 사람들의 집합소. 프로젝트 쇼케이스 · 라운지 · 툴 허브" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vibecoder-328967213016.asia-northeast3.run.app/" />
+  <meta property="og:site_name" content="VibeCoder" />
+  <meta property="og:locale" content="ko_KR" />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="VibeCoder — 바이브 코더 커뮤니티"/>
-  <meta name="twitter:description" content="AI로 앱을 만드는 사람들의 커뮤니티. 바이브코딩 시작했다면 여기로."/>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VibeCoder — 바이브 코더 커뮤니티" />
+  <meta name="twitter:description" content="AI로 앱을 만드는 사람들의 커뮤니티. 바이브코딩 시작했다면 여기로." />
 
   <!-- JSON-LD 구조화 데이터 (Google/Gemini Search 인식용) -->
   <script type="application/ld+json">
@@ -46,14 +49,15 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       --bg: #050508;
       --surface: #0d0d14;
       --surface2: #13131e;
-      --border: rgba(255,255,255,.06);
+      --border: rgba(255, 255, 255, .06);
       --accent: #7c3aed;
       --accent2: #06b6d4;
       --accent3: #f59e0b;
@@ -61,8 +65,19 @@
       --muted: #64748b;
       --radius: 14px;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
@@ -73,187 +88,349 @@
 
     /* ── 3D 배경 ── */
     canvas#particles {
-      position: fixed; inset: 0; z-index: 0;
-      pointer-events: none; opacity: .5;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .5;
     }
+
     .bg-orbs {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
+
     .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(120px); opacity: .07;
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .07;
       animation: orbFloat 18s ease-in-out infinite;
     }
-    .orb:nth-child(1){
-      width: 600px; height: 600px;
+
+    .orb:nth-child(1) {
+      width: 600px;
+      height: 600px;
       background: radial-gradient(circle, #7c3aed, transparent);
-      top: -200px; left: -150px; animation-delay: 0s;
+      top: -200px;
+      left: -150px;
+      animation-delay: 0s;
     }
-    .orb:nth-child(2){
-      width: 500px; height: 500px;
+
+    .orb:nth-child(2) {
+      width: 500px;
+      height: 500px;
       background: radial-gradient(circle, #06b6d4, transparent);
-      top: 30%; right: -100px; animation-delay: -6s;
+      top: 30%;
+      right: -100px;
+      animation-delay: -6s;
     }
-    .orb:nth-child(3){
-      width: 400px; height: 400px;
+
+    .orb:nth-child(3) {
+      width: 400px;
+      height: 400px;
       background: radial-gradient(circle, #f59e0b, transparent);
-      bottom: -100px; left: 30%; animation-delay: -12s;
+      bottom: -100px;
+      left: 30%;
+      animation-delay: -12s;
     }
+
     @keyframes orbFloat {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33% { transform: translate(40px,-60px) scale(1.05); }
-      66% { transform: translate(-30px,40px) scale(.95); }
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(40px, -60px) scale(1.05);
+      }
+
+      66% {
+        transform: translate(-30px, 40px) scale(.95);
+      }
     }
+
     .grid-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
       background-image:
-        linear-gradient(rgba(124,58,237,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,.04) 1px, transparent 1px);
+        linear-gradient(rgba(124, 58, 237, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, .04) 1px, transparent 1px);
       background-size: 60px 60px;
       animation: gridShift 40s linear infinite;
     }
+
     @keyframes gridShift {
-      0% { background-position: 0 0; }
-      100% { background-position: 60px 60px; }
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 60px 60px;
+      }
     }
 
     /* ── 레이아웃 ── */
-    .content { position: relative; z-index: 1; }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
 
     /* ── 헤더 ── */
     header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(5,5,8,.8);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 8, .8);
       backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
     }
+
     nav {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; gap: 8px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       height: 64px;
     }
+
     .logo {
-      font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
       background: linear-gradient(135deg, #7c3aed, #06b6d4);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-decoration: none; margin-right: auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      margin-right: auto;
       position: relative;
     }
+
     .logo::after {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.4) 50%, transparent 100%);
-      background-size: 200%; -webkit-background-clip: text;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .4) 50%, transparent 100%);
+      background-size: 200%;
+      -webkit-background-clip: text;
       animation: shimmer 3s linear infinite;
     }
+
     @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
     }
+
     nav a {
-      color: var(--muted); text-decoration: none;
-      font-size: .9rem; font-weight: 500; padding: 8px 14px;
-      border-radius: 8px; transition: all .2s;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all .2s;
     }
-    nav a:hover { color: var(--text); background: rgba(255,255,255,.05); }
+
+    nav a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, .05);
+    }
+
     .nav-cta {
       background: linear-gradient(135deg, #7c3aed, #5b21b6) !important;
-      color: #fff !important; padding: 8px 18px !important;
-      box-shadow: 0 0 20px rgba(124,58,237,.3);
+      color: #fff !important;
+      padding: 8px 18px !important;
+      box-shadow: 0 0 20px rgba(124, 58, 237, .3);
     }
-    .nav-cta:hover { box-shadow: 0 0 30px rgba(124,58,237,.5) !important; transform: translateY(-1px); }
+
+    .nav-cta:hover {
+      box-shadow: 0 0 30px rgba(124, 58, 237, .5) !important;
+      transform: translateY(-1px);
+    }
 
     /* ── 히어로 ── */
     .hero {
-      text-align: center; padding: 120px 24px 80px;
-      max-width: 900px; margin: 0 auto;
+      text-align: center;
+      padding: 120px 24px 80px;
+      max-width: 900px;
+      margin: 0 auto;
     }
+
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(124,58,237,.12); border: 1px solid rgba(124,58,237,.25);
-      color: #a78bfa; padding: 6px 16px; border-radius: 100px;
-      font-size: .82rem; font-weight: 600; margin-bottom: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 58, 237, .12);
+      border: 1px solid rgba(124, 58, 237, .25);
+      color: #a78bfa;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 600;
+      margin-bottom: 32px;
       animation: badgePulse 3s ease-in-out infinite;
     }
-    .hero-badge span { font-size: .7rem; }
-    @keyframes badgePulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(124,58,237,.3); }
-      50% { box-shadow: 0 0 0 8px rgba(124,58,237,0); }
+
+    .hero-badge span {
+      font-size: .7rem;
     }
+
+    @keyframes badgePulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(124, 58, 237, .3);
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(124, 58, 237, 0);
+      }
+    }
+
     h1.hero-title {
       font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 900; line-height: 1.1;
-      letter-spacing: -.04em; margin-bottom: 24px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -.04em;
+      margin-bottom: 24px;
     }
+
     .hero-title .line1 {
       background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
     .hero-title .line2 {
       background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 60%, #f59e0b 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
     .hero-sub {
-      font-size: 1.15rem; color: var(--muted); line-height: 1.7;
-      max-width: 600px; margin: 0 auto 48px;
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 48px;
     }
+
     .hero-actions {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
+
     .btn-primary {
       background: linear-gradient(135deg, #7c3aed, #5b21b6);
-      color: #fff; text-decoration: none;
-      padding: 14px 32px; border-radius: 10px;
-      font-size: 1rem; font-weight: 600;
-      box-shadow: 0 4px 24px rgba(124,58,237,.4);
-      transition: all .25s; display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 24px rgba(124, 58, 237, .4);
+      transition: all .25s;
+      display: inline-block;
     }
+
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(124,58,237,.6);
+      box-shadow: 0 8px 32px rgba(124, 58, 237, .6);
     }
+
     .btn-secondary {
-      background: rgba(255,255,255,.05);
+      background: rgba(255, 255, 255, .05);
       border: 1px solid var(--border);
-      color: var(--text); text-decoration: none;
-      padding: 14px 32px; border-radius: 10px;
-      font-size: 1rem; font-weight: 600;
-      transition: all .25s; display: inline-block;
+      color: var(--text);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all .25s;
+      display: inline-block;
     }
+
     .btn-secondary:hover {
-      background: rgba(255,255,255,.08);
-      border-color: rgba(124,58,237,.4);
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(124, 58, 237, .4);
       transform: translateY(-2px);
     }
 
     /* ── 통계 바 ── */
     .stats-bar {
-      display: flex; justify-content: center; gap: 48px;
-      padding: 32px 24px; flex-wrap: wrap;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 32px 24px;
+      flex-wrap: wrap;
     }
-    .stat-item { text-align: center; }
+
+    .stat-item {
+      text-align: center;
+    }
+
     .stat-num {
-      font-size: 2rem; font-weight: 800;
+      font-size: 2rem;
+      font-weight: 800;
       background: linear-gradient(135deg, #7c3aed, #06b6d4);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .stat-label { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+    .stat-label {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
 
     /* ── 섹션 공통 ── */
-    section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
     .section-header {
-      display: flex; align-items: baseline; justify-content: space-between;
-      margin-bottom: 40px; flex-wrap: wrap; gap: 12px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
+
     .section-title {
-      font-size: 1.8rem; font-weight: 800; letter-spacing: -.02em;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
     }
+
     .section-link {
-      color: var(--accent2); text-decoration: none;
-      font-size: .9rem; font-weight: 500;
+      color: var(--accent2);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
     }
-    .section-link:hover { text-decoration: underline; }
+
+    .section-link:hover {
+      text-decoration: underline;
+    }
 
     /* ── 프로젝트 카드 ── */
     .projects-grid {
@@ -261,476 +438,850 @@
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 20px;
     }
+
     .project-card {
       background: linear-gradient(145deg, var(--surface), var(--surface2));
-      border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden; transition: all .3s cubic-bezier(.34,1.56,.64,1);
-      text-decoration: none; color: inherit; display: block;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
+      text-decoration: none;
+      color: inherit;
+      display: block;
       position: relative;
     }
+
     .project-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(124,58,237,.12), transparent 60%);
-      opacity: 0; transition: opacity .3s; z-index: 0;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, .12), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 0;
     }
-    .project-card:hover { transform: translateY(-6px); border-color: rgba(124,58,237,.35); }
-    .project-card:hover::before { opacity: 1; }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 58, 237, .35);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
     .card-thumb {
-      width: 100%; height: 180px; object-fit: cover;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
       background: linear-gradient(135deg, #1e1b2e, #0f172a);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem; color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--muted);
     }
-    .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .card-body { padding: 20px; position: relative; z-index: 1; }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
     .card-author {
-      font-size: .75rem; color: var(--muted); margin-bottom: 8px;
+      font-size: .75rem;
+      color: var(--muted);
+      margin-bottom: 8px;
     }
+
     .card-title {
-      font-size: 1.05rem; font-weight: 700; margin-bottom: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
       line-height: 1.4;
     }
+
     .card-desc {
-      font-size: .85rem; color: var(--muted); line-height: 1.6;
-      display: -webkit-box; -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical; overflow: hidden;
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
+
     .card-tags {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
     }
+
     .tag {
-      background: rgba(124,58,237,.15); color: #a78bfa;
-      border: 1px solid rgba(124,58,237,.2);
-      font-size: .72rem; padding: 3px 10px; border-radius: 100px;
+      background: rgba(124, 58, 237, .15);
+      color: #a78bfa;
+      border: 1px solid rgba(124, 58, 237, .2);
+      font-size: .72rem;
+      padding: 3px 10px;
+      border-radius: 100px;
     }
+
     .card-meta {
-      display: flex; align-items: center; gap: 16px;
-      margin-top: 14px; padding-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
       border-top: 1px solid var(--border);
-      font-size: .8rem; color: var(--muted);
+      font-size: .8rem;
+      color: var(--muted);
     }
 
     /* ── 비어 있는 상태 ── */
     .empty-state {
-      text-align: center; padding: 60px 24px; color: var(--muted);
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--muted);
     }
-    .empty-icon { font-size: 3rem; margin-bottom: 16px; }
-    .empty-text { margin-bottom: 24px; font-size: .95rem; }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .empty-text {
+      margin-bottom: 24px;
+      font-size: .95rem;
+    }
 
     /* ── 라운지 게시글 목록 ── */
-    .posts-list { display: flex; flex-direction: column; gap: 12px; }
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .post-item {
       background: linear-gradient(135deg, var(--surface), var(--surface2));
-      border: 1px solid var(--border); border-radius: 10px;
-      padding: 18px 22px; text-decoration: none; color: inherit;
-      display: flex; align-items: center; gap: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 16px;
       transition: all .2s;
     }
+
     .post-item:hover {
-      border-color: rgba(6,182,212,.3);
-      box-shadow: 0 0 16px rgba(6,182,212,.08);
+      border-color: rgba(6, 182, 212, .3);
+      box-shadow: 0 0 16px rgba(6, 182, 212, .08);
       transform: translateX(4px);
     }
+
     .post-cat-badge {
-      padding: 4px 10px; border-radius: 6px;
-      font-size: .72rem; font-weight: 600; white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: .72rem;
+      font-weight: 600;
+      white-space: nowrap;
       flex-shrink: 0;
     }
-    .cat-tip { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.2); }
-    .cat-qna { background: rgba(6,182,212,.15); color: #22d3ee; border: 1px solid rgba(6,182,212,.2); }
-    .cat-showcase { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.2); }
-    .cat-free { background: rgba(255,255,255,.06); color: var(--muted); border: 1px solid var(--border); }
-    .post-title { font-size: .95rem; font-weight: 600; flex: 1; }
-    .post-meta { font-size: .78rem; color: var(--muted); white-space: nowrap; }
+
+    .cat-tip {
+      background: rgba(245, 158, 11, .15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, .2);
+    }
+
+    .cat-qna {
+      background: rgba(6, 182, 212, .15);
+      color: #22d3ee;
+      border: 1px solid rgba(6, 182, 212, .2);
+    }
+
+    .cat-showcase {
+      background: rgba(124, 58, 237, .15);
+      color: #a78bfa;
+      border: 1px solid rgba(124, 58, 237, .2);
+    }
+
+    .cat-free {
+      background: rgba(255, 255, 255, .06);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .post-title {
+      font-size: .95rem;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .post-meta {
+      font-size: .78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── AI 뉴스 섹션 ── */
+    .ai-news-section { padding: 60px 24px; max-width: 1200px; margin: 0 auto; }
+    .live-news-badge {
+      font-size: .72rem; padding: 4px 10px;
+      background: rgba(255,50,50,.15); color: #ff5555;
+      border: 1px solid rgba(255,50,50,.3);
+      border-radius: 100px; font-weight: 600;
+      animation: pulse-live 2s infinite;
+    }
+    @keyframes pulse-live { 0%,100%{opacity:1} 50%{opacity:.5} }
+    .news-filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .news-ftab {
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      border-radius: 100px; cursor: pointer; font-size: .8rem;
+      transition: all .2s; font-family: inherit;
+    }
+    .news-ftab.active, .news-ftab:hover {
+      background: rgba(6,182,212,.1); border-color: var(--accent2); color: var(--accent2);
+    }
+    .ai-news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .ai-news-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px; display: block;
+      text-decoration: none; color: inherit;
+      transition: transform .2s, border-color .2s;
+      position: relative; overflow: hidden;
+    }
+    .ai-news-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transition: transform .2s;
+    }
+    .ai-news-card:hover::before { transform: scaleX(1); }
+    .ai-news-card:hover { transform: translateY(-3px); border-color: rgba(6,182,212,.3); }
+    .ani-source { font-size: .7rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; font-weight: 600; }
+    .ani-title { font-size: .88rem; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+    .ani-time { font-size: .73rem; color: var(--muted); }
+    .ani-loading { color: var(--muted); padding: 20px; }
+
+    /* ── 블록깨기 배경 캔버스 ── */
+    #vibe-game-canvas {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; opacity: .25;
+    }
+    #vibe-game-hint {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 200; background: rgba(124,58,237,.3);
+      border: 1px solid rgba(124,58,237,.5); color: #fff;
+      font-size: .78rem; padding: 7px 16px; border-radius: 100px;
+      pointer-events: none; transition: opacity .5s; backdrop-filter: blur(8px);
+    }
 
     /* ── CTA 배너 ── */
     .cta-section {
-      text-align: center; padding: 80px 24px;
-      background: radial-gradient(ellipse at center, rgba(124,58,237,.1) 0%, transparent 70%);
+      text-align: center;
+      padding: 80px 24px;
+      background: radial-gradient(ellipse at center, rgba(124, 58, 237, .1) 0%, transparent 70%);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .cta-title { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
-    .cta-sub { color: var(--muted); font-size: 1rem; margin-bottom: 32px; }
+
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
 
     /* ── 특징 그리드 ── */
     .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
     }
+
     .feature-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
       transition: all .25s;
     }
+
     .feature-card:hover {
-      border-color: rgba(124,58,237,.25);
-      box-shadow: 0 4px 24px rgba(124,58,237,.07);
+      border-color: rgba(124, 58, 237, .25);
+      box-shadow: 0 4px 24px rgba(124, 58, 237, .07);
     }
-    .feature-icon { font-size: 2rem; margin-bottom: 16px; }
-    .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .feature-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
     /* ── 푸터 ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 40px 24px; text-align: center;
-      color: var(--muted); font-size: .85rem;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
     }
-    footer a { color: var(--muted); }
-    footer .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
 
     /* ── 반응형 ── */
     @media(max-width:640px) {
-      nav a:not(.nav-cta):not(.logo) { display: none; }
-      .stats-bar { gap: 24px; }
-      .section-header { flex-direction: column; }
+      nav a:not(.nav-cta):not(.logo) {
+        display: none;
+      }
+
+      .stats-bar {
+        gap: 24px;
+      }
+
+      .section-header {
+        flex-direction: column;
+      }
     }
 
     /* ── low-perf: 파티클/오브 숨김 ── */
     body.low-perf canvas,
     body.low-perf .bg-orbs,
-    body.low-perf .grid-bg { display: none !important; }
+    body.low-perf .grid-bg {
+      display: none !important;
+    }
+
     @media(prefers-reduced-motion: reduce) {
-      canvas, .bg-orbs, .grid-bg { display: none !important; }
-      .orb, .hero-badge { animation: none !important; }
+
+      canvas,
+      .bg-orbs,
+      .grid-bg {
+        display: none !important;
+      }
+
+      .orb,
+      .hero-badge {
+        animation: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- 3D 배경 -->
-<canvas id="particles"></canvas>
-<div class="bg-orbs">
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-</div>
-<div class="grid-bg"></div>
+  <!-- 3D 배경 -->
+  <canvas id="particles"></canvas>
+  <div class="bg-orbs">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+  <div class="grid-bg"></div>
 
-<div class="content">
+  <div class="content">
 
-<!-- 헤더 -->
-<header>
-  <nav>
-    <a href="/" class="logo">⚡ VibeCoder</a>
-    <a href="/showcase" data-i18n="nav_showcase">쇼케이스</a>
-    <a href="/lounge" data-i18n="nav_lounge">라운지</a>
-    <a href="/submit" class="nav-cta" data-i18n="nav_submit">프로젝트 올리기</a>
-  </nav>
-</header>
+    <!-- 헤더 -->
+    <header>
+      <nav>
+        <a href="/" class="logo">⚡ VibeCoder</a>
+        <a href="/showcase" data-i18n="nav_showcase">쇼케이스</a>
+        <a href="/lounge" data-i18n="nav_lounge">라운지</a>
+        <a href="/trends" data-i18n="nav_trends">AI 트렌드/뉴스</a>
+        <a href="/submit" class="nav-cta" data-i18n="nav_submit">프로젝트 올리기</a>
+      </nav>
+    </header>
 
-<!-- 히어로 -->
-<div class="hero">
-  <div class="hero-badge">
-    <span>✨</span> <span data-i18n="badge">AI로 만든 프로젝트의 집합소</span>
-  </div>
-  <h1 class="hero-title">
-    <span class="line1" data-i18n="hero_line1">바이브 코딩으로</span><br/>
-    <span class="line2" data-i18n="hero_line2">세상을 바꾸는 사람들</span>
-  </h1>
-  <p class="hero-sub" data-i18n="hero_sub">
-    Claude, ChatGPT, Cursor로 앱을 만들고 있다면 여기가 당신의 자리입니다.<br/>
-    프로젝트를 공유하고, 팁을 나누고, 동료를 만나세요.
-  </p>
-  <div class="hero-actions">
-    <a href="/showcase" class="btn-primary" data-i18n="btn_showcase">🚀 프로젝트 보기</a>
-    <a href="/submit" class="btn-secondary" data-i18n="btn_submit">내 프로젝트 올리기</a>
-  </div>
-</div>
-
-<!-- 통계 -->
-<div class="stats-bar">
-  <div class="stat-item">
-    <div class="stat-num" id="stat-projects">{{ project_count }}</div>
-    <div class="stat-label" data-i18n="stat_projects">등록된 프로젝트</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" id="stat-posts">{{ post_count }}</div>
-    <div class="stat-label" data-i18n="stat_posts">커뮤니티 글</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" id="stat-days">–</div>
-    <div class="stat-label" data-i18n="stat_days">⚡ 바이브코딩 시작 D+</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">∞</div>
-    <div class="stat-label" data-i18n="stat_possible">가능성</div>
-  </div>
-</div>
-
-<!-- 특징 -->
-<section>
-  <div class="section-header">
-    <h2 class="section-title">왜 VibeCoder인가?</h2>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">🎨</div>
-      <div class="feature-title">프로젝트 쇼케이스</div>
-      <div class="feature-desc">AI로 만든 앱, 툴, 자동화 스크립트를 갤러리 형태로 공유하세요. 스택, 링크, 설명까지 한 번에.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">💬</div>
-      <div class="feature-title">코더스 라운지</div>
-      <div class="feature-desc">꿀팁, Q&A, 자유 토론. Claude 프롬프트 공유부터 배포 삽질기까지 — 같은 언어를 쓰는 사람들과.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔧</div>
-      <div class="feature-title">툴 허브 (준비중)</div>
-      <div class="feature-desc">바이브 코더들이 자주 쓰는 툴 모음. SpreadRadar, 템플릿, 가이드까지 한 곳에.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🌐</div>
-      <div class="feature-title">SEO 노출</div>
-      <div class="feature-desc">"바이브 코더", "AI 앱 만들기" 검색에서 당신의 프로젝트가 노출됩니다. 무료로.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 피처드 프로젝트 -->
-<section>
-  <div class="section-header">
-    <h2 class="section-title">🔥 주목받는 프로젝트</h2>
-    <a href="/showcase" class="section-link">전체 보기 →</a>
-  </div>
-
-  {% if featured %}
-  <div class="projects-grid">
-    {% for proj in featured %}
-    <a href="/showcase/{{ proj.slug }}" class="project-card">
-      <div class="card-thumb">
-        {% if proj.thumbnail %}
-        <img src="{{ proj.thumbnail }}" alt="{{ proj.title }}" loading="lazy"/>
-        {% else %}
-        ⚡
-        {% endif %}
+    <!-- 히어로 -->
+    <div class="hero">
+      <div class="hero-badge">
+        <span>✨</span> <span data-i18n="badge">AI로 만든 프로젝트의 집합소</span>
       </div>
-      <div class="card-body">
-        <div class="card-author">{{ proj.author or '익명' }}</div>
-        <div class="card-title">{{ proj.title }}</div>
-        <div class="card-desc">{{ proj.description or '' }}</div>
-        {% if proj.tech_stack %}
-        <div class="card-tags">
-          {% set tech = proj.tech_stack %}
-          {% if tech is string %}
-            {% for t in tech[1:-1].split(',') %}
-            <span class="tag">{{ t.strip().strip('"') }}</span>
-            {% endfor %}
-          {% else %}
-            {% for t in tech[:4] %}
-            <span class="tag">{{ t }}</span>
-            {% endfor %}
-          {% endif %}
+      <h1 class="hero-title">
+        <span class="line1" data-i18n="hero_line1">바이브 코딩으로</span><br />
+        <span class="line2" data-i18n="hero_line2">세상을 바꾸는 사람들</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Claude, ChatGPT, Cursor로 앱을 만들고 있다면 여기가 당신의 자리입니다.<br />
+        프로젝트를 공유하고, 팁을 나누고, 동료를 만나세요.
+      </p>
+      <div class="hero-actions">
+        <a href="/showcase" class="btn-primary" data-i18n="btn_showcase">🚀 프로젝트 보기</a>
+        <a href="/submit" class="btn-secondary" data-i18n="btn_submit">내 프로젝트 올리기</a>
+      </div>
+    </div>
+
+    <!-- 통계 -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num" id="stat-projects">{{ project_count }}</div>
+        <div class="stat-label" data-i18n="stat_projects">등록된 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-posts">{{ post_count }}</div>
+        <div class="stat-label" data-i18n="stat_posts">커뮤니티 글</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-days">–</div>
+        <div class="stat-label" data-i18n="stat_days">⚡ 바이브코딩 시작 D+</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label" data-i18n="stat_possible">가능성</div>
+      </div>
+    </div>
+
+    <!-- 특징 -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">왜 VibeCoder인가?</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <div class="feature-title">프로젝트 쇼케이스</div>
+          <div class="feature-desc">AI로 만든 앱, 툴, 자동화 스크립트를 갤러리 형태로 공유하세요. 스택, 링크, 설명까지 한 번에.</div>
         </div>
-        {% endif %}
-        <div class="card-meta">
-          <span>👁 {{ proj.view_count }}</span>
-          <span>❤️ {{ proj.likes }}</span>
-          <span style="margin-left:auto">{{ proj.created_at[:10] if proj.created_at else '' }}</span>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <div class="feature-title">코더스 라운지</div>
+          <div class="feature-desc">꿀팁, Q&A, 자유 토론. Claude 프롬프트 공유부터 배포 삽질기까지 — 같은 언어를 쓰는 사람들과.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <div class="feature-title">툴 허브 (준비중)</div>
+          <div class="feature-desc">바이브 코더들이 자주 쓰는 툴 모음. SpreadRadar, 템플릿, 가이드까지 한 곳에.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-title">SEO 노출</div>
+          <div class="feature-desc">"바이브 코더", "AI 앱 만들기" 검색에서 당신의 프로젝트가 노출됩니다. 무료로.</div>
         </div>
       </div>
-    </a>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="empty-state">
-    <div class="empty-icon">🚀</div>
-    <div class="empty-text">아직 프로젝트가 없습니다.<br/>첫 번째 주인공이 되어보세요!</div>
-    <a href="/submit" class="btn-primary">프로젝트 올리기</a>
-  </div>
-  {% endif %}
-</section>
+    </section>
 
-<!-- 최신 라운지 글 -->
-<section>
-  <div class="section-header">
-    <h2 class="section-title">💬 라운지 최신 글</h2>
-    <a href="/lounge" class="section-link">전체 보기 →</a>
-  </div>
+    <!-- 피처드 프로젝트 -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">🔥 주목받는 프로젝트</h2>
+        <a href="/showcase" class="section-link">전체 보기 →</a>
+      </div>
 
-  {% if latest_posts %}
-  <div class="posts-list">
-    {% for post in latest_posts %}
-    <a href="/lounge/{{ post.slug }}" class="post-item">
-      <span class="post-cat-badge cat-{{ post.category or 'free' }}">
-        {{ {'tip':'💡 꿀팁','qna':'❓ Q&A','showcase':'🎨 쇼케이스','free':'💬 자유'}.get(post.category, post.category) }}
-      </span>
-      <span class="post-title">{{ post.title }}</span>
-      <span class="post-meta">{{ post.author or '익명' }} · {{ post.created_at[:10] if post.created_at else '' }}</span>
-    </a>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="empty-state">
-    <div class="empty-icon">✍️</div>
-    <div class="empty-text">아직 글이 없습니다. 첫 글을 남겨보세요!</div>
-    <a href="/lounge/write" class="btn-secondary">글 쓰기</a>
-  </div>
-  {% endif %}
-</section>
+      {% if featured %}
+      <div class="projects-grid">
+        {% for proj in featured %}
+        <a href="/showcase/{{ proj.slug }}" class="project-card">
+          <div class="card-thumb">
+            {% if proj.thumbnail %}
+            <img src="{{ proj.thumbnail }}" alt="{{ proj.title }}" loading="lazy" />
+            {% else %}
+            ⚡
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <div class="card-author">{{ proj.author or '익명' }}</div>
+            <div class="card-title">{{ proj.title }}</div>
+            <div class="card-desc">{{ proj.description or '' }}</div>
+            {% if proj.tech_stack %}
+            <div class="card-tags">
+              {% set tech = proj.tech_stack %}
+              {% if tech is string %}
+              {% for t in tech[1:-1].split(',') %}
+              <span class="tag">{{ t.strip().strip('"') }}</span>
+              {% endfor %}
+              {% else %}
+              {% for t in tech[:4] %}
+              <span class="tag">{{ t }}</span>
+              {% endfor %}
+              {% endif %}
+            </div>
+            {% endif %}
+            <div class="card-meta">
+              <span>👁 {{ proj.view_count }}</span>
+              <span>❤️ {{ proj.likes }}</span>
+              <span style="margin-left:auto">{{ proj.created_at[:10] if proj.created_at else '' }}</span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">🚀</div>
+        <div class="empty-text">아직 프로젝트가 없습니다.<br />첫 번째 주인공이 되어보세요!</div>
+        <a href="/submit" class="btn-primary">프로젝트 올리기</a>
+      </div>
+      {% endif %}
+    </section>
 
-<!-- CTA -->
-<div class="cta-section">
-  <h2 class="cta-title">당신의 프로젝트를 세상에 보여주세요</h2>
-  <p class="cta-sub">코드 한 줄 없이도, AI와 함께 만든 모든 것이 여기서 빛납니다.</p>
-  <a href="/submit" class="btn-primary" style="font-size:1.1rem; padding:16px 40px;">무료로 등록하기 →</a>
-</div>
+    <!-- 최신 라운지 글 -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">💬 라운지 최신 글</h2>
+        <a href="/lounge" class="section-link">전체 보기 →</a>
+      </div>
 
-<!-- 푸터 -->
-<footer>
-  <div class="footer-links">
-    <a href="/showcase">쇼케이스</a>
-    <a href="/lounge">라운지</a>
-    <a href="/submit">프로젝트 올리기</a>
-  </div>
-  <p>© 2025 VibeCoder — 바이브 코더들의 커뮤니티</p>
-</footer>
+      {% if latest_posts %}
+      <div class="posts-list">
+        {% for post in latest_posts %}
+        <a href="/lounge/{{ post.slug }}" class="post-item">
+          <span class="post-cat-badge cat-{{ post.category or 'free' }}">
+            {{ {'tip':'💡 꿀팁','qna':'❓ Q&A','showcase':'🎨 쇼케이스','free':'💬 자유'}.get(post.category, post.category) }}
+          </span>
+          <span class="post-title">{{ post.title }}</span>
+          <span class="post-meta">{{ post.author or '익명' }} · {{ post.created_at[:10] if post.created_at else ''
+            }}</span>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">✍️</div>
+        <div class="empty-text">아직 글이 없습니다. 첫 글을 남겨보세요!</div>
+        <a href="/lounge/write" class="btn-secondary">글 쓰기</a>
+      </div>
+      {% endif %}
+    </section>
 
-</div><!-- .content -->
+    <!-- 🌐 AI 동향 뉴스 섹션 -->
+    <section class="ai-news-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">🌐 AI 동향 뉴스</h2>
+          <p style="color:var(--muted); font-size:0.85rem; margin-top:4px;">매시간 자동 업데이트 · 세계 최신 AI 소식</p>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+          <span class="live-news-badge">🔴 LIVE</span>
+          <a href="/trends" class="section-link">전체 보기 →</a>
+        </div>
+      </div>
 
-<script>
-/* ── 적응형 퍼포먼스 감지 ── */
-let isLowPerf = false;
-(function detectPerf(){
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const lowMem = navigator.deviceMemory && navigator.deviceMemory < 4;
-  const lowCores = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2;
-  if(isMobile || lowMem || lowCores){
-    document.body.classList.add('low-perf'); isLowPerf = true; return;
-  }
-  let frames = 0, start = performance.now();
-  function probe(){
-    if(++frames >= 30){
-      const fps = frames / ((performance.now()-start)/1000);
-      if(fps < 30){ document.body.classList.add('low-perf'); isLowPerf = true; }
-      return;
-    }
-    requestAnimationFrame(probe);
-  }
-  requestAnimationFrame(probe);
-})();
+      <!-- 뉴스 필터 탭 -->
+      <div class="news-filter-tabs">
+        <button class="news-ftab active" data-src="all">전체</button>
+        <button class="news-ftab" data-src="TechCrunch AI">TechCrunch</button>
+        <button class="news-ftab" data-src="The Verge AI">The Verge</button>
+        <button class="news-ftab" data-src="VentureBeat AI">VentureBeat</button>
+      </div>
 
-/* ── 파티클 시스템 ── */
-(function initParticles(){
-  const canvas = document.getElementById('particles');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, pts;
-  function resize(){
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  function mkPt(){
-    return {
-      x: Math.random()*W, y: Math.random()*H,
-      vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4,
-      r: Math.random()*1.5+.5,
-      c: Math.random() > .5 ? '#7c3aed' : '#06b6d4'
-    };
-  }
-  function init(){
-    resize();
-    const N = isLowPerf ? 0 : 60;
-    pts = Array.from({length:N}, mkPt);
-  }
-  function draw(){
-    if(isLowPerf){ return; }
-    ctx.clearRect(0,0,W,H);
-    for(let i=0;i<pts.length;i++){
-      const p = pts[i];
-      p.x += p.vx; p.y += p.vy;
-      if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
-      if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = p.c; ctx.globalAlpha = .5;
-      ctx.fill();
-      for(let j=i+1;j<pts.length;j++){
-        const q = pts[j];
-        const dx = p.x-q.x, dy = p.y-q.y;
-        const d = Math.sqrt(dx*dx+dy*dy);
-        if(d < 120){
-          ctx.beginPath();
-          ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-          ctx.strokeStyle = p.c;
-          ctx.globalAlpha = (1-d/120)*.15;
-          ctx.lineWidth = .5; ctx.stroke();
+      {% if ai_news %}
+      <div class="ai-news-grid" id="ai-news-grid">
+        {% for n in ai_news[:9] %}
+        <a href="{{ n.url }}" target="_blank" rel="noopener" class="ai-news-card">
+          <div class="ani-source">{{ n.source }}</div>
+          <div class="ani-title">{{ n.title }}</div>
+          <div class="ani-time">{{ n.time }}</div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="ai-news-grid" id="ai-news-grid">
+        <div class="ani-loading">📰 뉴스 로딩 중...</div>
+      </div>
+      {% endif %}
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2 class="cta-title">당신의 프로젝트를 세상에 보여주세요</h2>
+      <p class="cta-sub">코드 한 줄 없이도, AI와 함께 만든 모든 것이 여기서 빛납니다.</p>
+      <a href="/submit" class="btn-primary" style="font-size:1.1rem; padding:16px 40px;">무료로 등록하기 →</a>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+      <div class="footer-links">
+        <a href="/showcase">쇼케이스</a>
+        <a href="/lounge">라운지</a>
+        <a href="/submit">프로젝트 올리기</a>
+      </div>
+      <p>© 2025 VibeCoder — 바이브 코더들의 커뮤니티</p>
+    </footer>
+
+  </div><!-- .content -->
+
+  <script>
+    /* ── 적응형 퍼포먼스 감지 ── */
+    let isLowPerf = false;
+    (function detectPerf() {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const lowMem = navigator.deviceMemory && navigator.deviceMemory < 4;
+      const lowCores = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2;
+      if (isMobile || lowMem || lowCores) {
+        document.body.classList.add('low-perf'); isLowPerf = true; return;
+      }
+      let frames = 0, start = performance.now();
+      function probe() {
+        if (++frames >= 30) {
+          const fps = frames / ((performance.now() - start) / 1000);
+          if (fps < 30) { document.body.classList.add('low-perf'); isLowPerf = true; }
+          return;
         }
+        requestAnimationFrame(probe);
+      }
+      requestAnimationFrame(probe);
+    })();
+
+    /* ── 파티클 시스템 ── */
+    (function initParticles() {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, pts;
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      function mkPt() {
+        return {
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4,
+          r: Math.random() * 1.5 + .5,
+          c: Math.random() > .5 ? '#7c3aed' : '#06b6d4'
+        };
+      }
+      function init() {
+        resize();
+        const N = isLowPerf ? 0 : 60;
+        pts = Array.from({ length: N }, mkPt);
+      }
+      function draw() {
+        if (isLowPerf) { return; }
+        ctx.clearRect(0, 0, W, H);
+        for (let i = 0; i < pts.length; i++) {
+          const p = pts[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.c; ctx.globalAlpha = .5;
+          ctx.fill();
+          for (let j = i + 1; j < pts.length; j++) {
+            const q = pts[j];
+            const dx = p.x - q.x, dy = p.y - q.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = p.c;
+              ctx.globalAlpha = (1 - d / 120) * .15;
+              ctx.lineWidth = .5; ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      init();
+      window.addEventListener('resize', init);
+      draw();
+    })();
+
+    /* ── 숫자 카운트업 애니메이션 ── */
+    function countUp(el, target, duration = 1200) {
+      if (!el || target === 0) return;
+      let start = 0, startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        const p = Math.min((ts - startTime) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(ease * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+    window.addEventListener('load', () => {
+      const pEl = document.getElementById('stat-projects');
+      const lEl = document.getElementById('stat-posts');
+      if (pEl) countUp(pEl, parseInt(pEl.textContent) || 0);
+      if (lEl) countUp(lEl, parseInt(lEl.textContent) || 0);
+
+      /* ── 바이브코딩 D+ 카운터 ── */
+      const dEl = document.getElementById('stat-days');
+      if (dEl) {
+        const start = new Date('2026-01-01');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const days = Math.floor((today - start) / 86400000) + 1;
+        countUp(dEl, days);
+      }
+    });
+
+    /* ── i18n: 브라우저 언어 감지 → 영문 자동 전환 ── */
+    (function initI18n() {
+      const lang = (navigator.language || navigator.userLanguage || 'ko').toLowerCase();
+      const isKo = lang.startsWith('ko');
+      if (isKo) return; // 한국어면 기본 HTML 그대로
+
+      const en = {
+        nav_showcase: 'Showcase',
+        nav_lounge: 'Lounge',
+        nav_submit: 'Submit Project',
+        badge: 'Where AI-built projects live',
+        hero_line1: 'Vibe Coders',
+        hero_line2: 'Changing the World',
+        hero_sub: "If you're building with Claude, ChatGPT, or Cursor — this is your home.<br/>Share projects, swap tips, and meet your people.",
+        btn_showcase: '🚀 Browse Projects',
+        btn_submit: 'Submit Mine',
+        stat_projects: 'Projects',
+        stat_posts: 'Community Posts',
+        stat_days: '⚡ Days Vibe Coding',
+        stat_possible: 'Possibilities',
+      };
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (en[key]) el.innerHTML = en[key];
+      });
+
+      // 페이지 타이틀 & description
+      document.title = 'VibeCoder — Vibe Coder Community | AI App Builder Hub';
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.content = 'Community for vibe coders building apps with Claude, ChatGPT, and Cursor. Share projects, tips, and connect — no coding background needed.';
+    })();
+  </script>
+
+  <!-- 🎮 배경 블록깨기 캔버스 -->
+  <canvas id="vibe-game-canvas"></canvas>
+  <div id="vibe-game-hint">🎮 마우스로 패들 조종!</div>
+
+  <script>
+  /* ── 배경 블록깨기 게임 ── */
+  (function(){
+    const cv = document.getElementById('vibe-game-canvas');
+    if (!cv) return;
+    const cx = cv.getContext('2d');
+    let W, H;
+    function resize(){ W = cv.width = innerWidth; H = cv.height = innerHeight; initB(); }
+    const PW=110, PH=7, BR=6;
+    const COLS_FN = ()=>Math.max(4, Math.floor(W/88));
+    const COLORS=['#7c3aed33','#06b6d433','#f59e0b33','#10b98133','#ec489933'];
+    let px=0, mx=innerWidth/2, ball={x:0,y:0,dx:2.8,dy:-3.2}, bricks=[], score=0, lives=3, started=false, parts=[];
+
+    function initB(){
+      bricks=[];
+      const cols=COLS_FN(), bw=(W-50)/cols-5;
+      for(let r=0;r<5;r++) for(let c=0;c<cols;c++)
+        bricks.push({x:25+c*(bw+5),y:75+r*26,w:bw,h:18,hp:r<2?1:2,alive:true,col:COLORS[r%5]});
+      ball.x=mx; ball.y=H-140;
+    }
+    resize(); window.addEventListener('resize',resize);
+    document.addEventListener('mousemove',e=>{mx=e.clientX; started=true;});
+    document.addEventListener('touchmove',e=>{mx=e.touches[0].clientX; started=true;},{passive:true});
+
+    function spawnP(x,y,col){
+      for(let i=0;i<6;i++){
+        const a=Math.random()*Math.PI*2, s=Math.random()*2.5+1;
+        parts.push({x,y,dx:Math.cos(a)*s,dy:Math.sin(a)*s,r:Math.random()*2.5+1,life:1,col});
       }
     }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  }
-  init();
-  window.addEventListener('resize', init);
-  draw();
-})();
+    function loop(){
+      cx.clearRect(0,0,W,H);
+      px+=(mx-PW/2-px)*0.14;
+      px=Math.max(0,Math.min(W-PW,px));
+      const py=H-46;
 
-/* ── 숫자 카운트업 애니메이션 ── */
-function countUp(el, target, duration=1200){
-  if(!el || target===0) return;
-  let start=0, startTime=null;
-  function step(ts){
-    if(!startTime) startTime=ts;
-    const p=Math.min((ts-startTime)/duration,1);
-    const ease=1-Math.pow(1-p,3);
-    el.textContent = Math.floor(ease*target);
-    if(p<1) requestAnimationFrame(step);
-    else el.textContent = target;
-  }
-  requestAnimationFrame(step);
-}
-window.addEventListener('load',()=>{
-  const pEl = document.getElementById('stat-projects');
-  const lEl = document.getElementById('stat-posts');
-  if(pEl) countUp(pEl, parseInt(pEl.textContent)||0);
-  if(lEl) countUp(lEl, parseInt(lEl.textContent)||0);
+      if(started){
+        ball.x+=ball.dx; ball.y+=ball.dy;
+        if(ball.x-BR<0){ball.dx=Math.abs(ball.dx);ball.x=BR;}
+        if(ball.x+BR>W){ball.dx=-Math.abs(ball.dx);ball.x=W-BR;}
+        if(ball.y-BR<0){ball.dy=Math.abs(ball.dy);}
+        if(ball.y+BR>H){lives--;ball.x=px+PW/2;ball.y=H-80;ball.dx=(Math.random()-.5)*5+2;ball.dy=-3.5;if(lives<=0){lives=3;score=0;initB();}}
+        if(ball.y+BR>=py&&ball.y-BR<=py+PH&&ball.x>=px&&ball.x<=px+PW){
+          ball.dy=-Math.abs(ball.dy);
+          ball.dx=((ball.x-px)/PW-.5)*8;
+        }
+        bricks.forEach(b=>{
+          if(!b.alive)return;
+          if(ball.x+BR>b.x&&ball.x-BR<b.x+b.w&&ball.y+BR>b.y&&ball.y-BR<b.y+b.h){
+            b.hp--; if(!b.hp){b.alive=false;score++;spawnP(b.x+b.w/2,b.y+b.h/2,b.col);}
+            ball.dy*=-1;
+          }
+        });
+        if(bricks.every(b=>!b.alive)){initB(); ball.dy-=.3;}
+      }
 
-  /* ── 바이브코딩 D+ 카운터 ── */
-  const dEl = document.getElementById('stat-days');
-  if(dEl){
-    const start = new Date('2026-01-01');
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    const days = Math.floor((today - start) / 86400000) + 1;
-    countUp(dEl, days);
-  }
-});
+      /* draw */
+      bricks.forEach(b=>{
+        if(!b.alive)return;
+        cx.fillStyle=b.col; cx.strokeStyle=b.col.replace('33','66');
+        cx.lineWidth=1; cx.beginPath(); cx.roundRect(b.x,b.y,b.w,b.h,3); cx.fill(); cx.stroke();
+      });
+      const g=cx.createLinearGradient(px,py,px+PW,py);
+      g.addColorStop(0,'#7c3aed88'); g.addColorStop(1,'#06b6d488');
+      cx.fillStyle=g; cx.beginPath(); cx.roundRect(px,py,PW,PH,4); cx.fill();
+      const bg=cx.createRadialGradient(ball.x-2,ball.y-2,1,ball.x,ball.y,BR);
+      bg.addColorStop(0,'#fff'); bg.addColorStop(1,'#7c3aed');
+      cx.fillStyle=bg; cx.beginPath(); cx.arc(ball.x,ball.y,BR,0,Math.PI*2); cx.fill();
+      parts=parts.filter(p=>p.life>0);
+      parts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;p.dy+=.08;p.life-=.025;cx.save();cx.globalAlpha=p.life;cx.fillStyle=p.col.replace('33','ff');cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fill();cx.restore();});
+      cx.fillStyle='rgba(255,255,255,0.12)'; cx.font='13px Inter';
+      cx.fillText(`⭐${score}`,14,H-12); cx.fillText(`❤️${lives}`,55,H-12);
+      requestAnimationFrame(loop);
+    }
+    setTimeout(()=>{const h=document.getElementById('vibe-game-hint');if(h){h.style.opacity='0';setTimeout(()=>h.style.display='none',500);}},3000);
+    loop();
+  })();
 
-/* ── i18n: 브라우저 언어 감지 → 영문 자동 전환 ── */
-(function initI18n(){
-  const lang = (navigator.language || navigator.userLanguage || 'ko').toLowerCase();
-  const isKo = lang.startsWith('ko');
-  if(isKo) return; // 한국어면 기본 HTML 그대로
-
-  const en = {
-    nav_showcase: 'Showcase',
-    nav_lounge:   'Lounge',
-    nav_submit:   'Submit Project',
-    badge:        'Where AI-built projects live',
-    hero_line1:   'Vibe Coders',
-    hero_line2:   'Changing the World',
-    hero_sub:     "If you're building with Claude, ChatGPT, or Cursor — this is your home.<br/>Share projects, swap tips, and meet your people.",
-    btn_showcase: '🚀 Browse Projects',
-    btn_submit:   'Submit Mine',
-    stat_projects:'Projects',
-    stat_posts:   'Community Posts',
-    stat_days:    '⚡ Days Vibe Coding',
-    stat_possible:'Possibilities',
-  };
-
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if(en[key]) el.innerHTML = en[key];
-  });
-
-  // 페이지 타이틀 & description
-  document.title = 'VibeCoder — Vibe Coder Community | AI App Builder Hub';
-  const desc = document.querySelector('meta[name="description"]');
-  if(desc) desc.content = 'Community for vibe coders building apps with Claude, ChatGPT, and Cursor. Share projects, tips, and connect — no coding background needed.';
-})();
-</script>
+  /* ── AI 뉴스 탭 필터 ── */
+  (function(){
+    const allCards = Array.from(document.querySelectorAll('#ai-news-grid .ai-news-card'));
+    document.querySelectorAll('.news-ftab').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.news-ftab').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const src = btn.dataset.src;
+        allCards.forEach(card=>{
+          const cardSrc = card.querySelector('.ani-source').textContent.trim();
+          card.style.display = (src==='all' || cardSrc===src) ? '' : 'none';
+        });
+      });
+    });
+  })();
+  </script>
 
 </body>
+
 </html>

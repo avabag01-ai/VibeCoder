@@ -1,230 +1,595 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 프로젝트 쇼케이스 — VibeCoder | 바이브코딩 갤러리</title>
-  <meta name="description" content="바이브 코더들이 Claude, ChatGPT, Cursor로 만든 AI 프로젝트 갤러리. 비개발자가 만든 앱, 자동화, 툴 모음."/>
-  <meta name="keywords" content="AI 프로젝트, 바이브코딩 결과물, Claude로 만든 앱, ChatGPT 프로젝트, Cursor 앱, AI 자동화, 비개발자 포트폴리오"/>
-  <meta name="robots" content="index, follow"/>
-  <meta property="og:title" content="AI 프로젝트 쇼케이스 — VibeCoder"/>
-  <meta property="og:description" content="바이브 코더들이 AI로 만든 프로젝트 갤러리. Claude, ChatGPT, Cursor 결과물 모음."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="VibeCoder"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <meta name="description" content="바이브 코더들이 Claude, ChatGPT, Cursor로 만든 AI 프로젝트 갤러리. 비개발자가 만든 앱, 자동화, 툴 모음." />
+  <meta name="keywords" content="AI 프로젝트, 바이브코딩 결과물, Claude로 만든 앱, ChatGPT 프로젝트, Cursor 앱, AI 자동화, 비개발자 포트폴리오" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="AI 프로젝트 쇼케이스 — VibeCoder" />
+  <meta property="og:description" content="바이브 코더들이 AI로 만든 프로젝트 갤러리. Claude, ChatGPT, Cursor 결과물 모음." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VibeCoder" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --bg:#050508;--surface:#0d0d14;--surface2:#13131e;--border:rgba(255,255,255,.06);
-      --accent:#7c3aed;--accent2:#06b6d4;--accent3:#f59e0b;--text:#f1f5f9;--muted:#64748b;--radius:14px;
+      --bg: #050508;
+      --surface: #0d0d14;
+      --surface2: #13131e;
+      --border: rgba(255, 255, 255, .06);
+      --accent: #7c3aed;
+      --accent2: #06b6d4;
+      --accent3: #f59e0b;
+      --text: #f1f5f9;
+      --muted: #64748b;
+      --radius: 14px;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-    canvas#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;}
-    .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-    .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.06;animation:orbFloat 20s ease-in-out infinite;}
-    .orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,#7c3aed,transparent);top:-150px;left:-100px;}
-    .orb:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,#06b6d4,transparent);bottom:10%;right:-80px;animation-delay:-8s;}
-    @keyframes orbFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(30px,-50px);}}
-    .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-      background-image:linear-gradient(rgba(124,58,237,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.03) 1px,transparent 1px);
-      background-size:60px 60px;animation:gridShift 40s linear infinite;}
-    @keyframes gridShift{0%{background-position:0 0;}100%{background-position:60px 60px;}}
-    .content{position:relative;z-index:1;}
 
-    header{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-    nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;height:64px;padding:0 24px;}
-    .logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;margin-right:auto;}
-    nav a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .2s;}
-    nav a:hover{color:var(--text);background:rgba(255,255,255,.05);}
-    .nav-cta{background:linear-gradient(135deg,#7c3aed,#5b21b6)!important;color:#fff!important;padding:8px 18px!important;box-shadow:0 0 20px rgba(124,58,237,.3);}
-    .nav-cta:hover{box-shadow:0 0 30px rgba(124,58,237,.5)!important;transform:translateY(-1px);}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    main{max-width:1200px;margin:0 auto;padding:60px 24px;}
-    .page-header{margin-bottom:48px;}
-    .page-title{font-size:2.2rem;font-weight:800;margin-bottom:8px;}
-    .page-sub{color:var(--muted);}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    .filter-bar{display:flex;gap:10px;margin-bottom:32px;flex-wrap:wrap;align-items:center;}
-    .filter-input{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);
-      color:var(--text);padding:10px 16px;border-radius:10px;font-size:.9rem;outline:none;transition:border .2s;}
-    .filter-input:focus{border-color:rgba(124,58,237,.4);}
-    .filter-btn{padding:10px 20px;border-radius:10px;border:1px solid var(--border);
-      background:var(--surface);color:var(--muted);font-size:.85rem;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;}
-    .filter-btn.active,.filter-btn:hover{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.3);color:#a78bfa;}
-    .submit-btn{padding:10px 20px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#5b21b6);
-      color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;
-      display:inline-block;box-shadow:0 2px 12px rgba(124,58,237,.3);}
-    .submit-btn:hover{box-shadow:0 4px 20px rgba(124,58,237,.5);transform:translateY(-1px);}
+    canvas#particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .4;
+    }
 
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
-    .project-card{background:linear-gradient(145deg,var(--surface),var(--surface2));
-      border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
-      transition:all .3s cubic-bezier(.34,1.56,.64,1);text-decoration:none;color:inherit;display:block;position:relative;}
-    .project-card::before{content:'';position:absolute;inset:0;
-      background:radial-gradient(circle at 50% 0%,rgba(124,58,237,.12),transparent 60%);
-      opacity:0;transition:opacity .3s;z-index:0;}
-    .project-card:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.35);}
-    .project-card:hover::before{opacity:1;}
-    .card-thumb{width:100%;height:180px;background:linear-gradient(135deg,#1e1b2e,#0f172a);
-      display:flex;align-items:center;justify-content:center;font-size:3rem;overflow:hidden;}
-    .card-thumb img{width:100%;height:100%;object-fit:cover;}
-    .card-body{padding:20px;position:relative;z-index:1;}
-    .card-author{font-size:.75rem;color:var(--muted);margin-bottom:8px;}
-    .card-title{font-size:1.05rem;font-weight:700;margin-bottom:10px;line-height:1.4;}
-    .card-desc{font-size:.85rem;color:var(--muted);line-height:1.6;
-      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-    .card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
-    .tag{background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.2);
-      font-size:.72rem;padding:3px 10px;border-radius:100px;}
-    .card-meta{display:flex;align-items:center;gap:16px;margin-top:14px;padding-top:14px;
-      border-top:1px solid var(--border);font-size:.8rem;color:var(--muted);}
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-    .pagination{display:flex;gap:8px;justify-content:center;margin-top:48px;}
-    .page-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-      border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;
-      background:var(--surface);border:1px solid var(--border);color:var(--muted);}
-    .page-btn:hover,.page-btn.active{background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.3);color:#a78bfa;}
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .06;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
 
-    .empty-state{text-align:center;padding:80px 24px;color:var(--muted);}
-    .empty-icon{font-size:3rem;margin-bottom:16px;}
-    .total-badge{font-size:.85rem;color:var(--muted);margin-left:auto;}
+    .orb:nth-child(1) {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #7c3aed, transparent);
+      top: -150px;
+      left: -100px;
+    }
 
-    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--muted);font-size:.85rem;margin-top:40px;}
+    .orb:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #06b6d4, transparent);
+      bottom: 10%;
+      right: -80px;
+      animation-delay: -8s;
+    }
 
-    body.low-perf canvas,body.low-perf .bg-orbs,body.low-perf .grid-bg{display:none!important;}
-    @media(prefers-reduced-motion:reduce){canvas,.bg-orbs,.grid-bg{display:none!important;}}
-    @media(max-width:640px){nav a:not(.nav-cta):not(.logo){display:none;}}
+    @keyframes orbFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, -50px);
+      }
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(124, 58, 237, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, .03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 40s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 60px 60px;
+      }
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 8, .85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 64px;
+      padding: 0 24px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      margin-right: auto;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all .2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, #7c3aed, #5b21b6) !important;
+      color: #fff !important;
+      padding: 8px 18px !important;
+      box-shadow: 0 0 20px rgba(124, 58, 237, .3);
+    }
+
+    .nav-cta:hover {
+      box-shadow: 0 0 30px rgba(124, 58, 237, .5) !important;
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .page-header {
+      margin-bottom: 48px;
+    }
+
+    .page-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .page-sub {
+      color: var(--muted);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: .9rem;
+      outline: none;
+      transition: border .2s;
+    }
+
+    .filter-input:focus {
+      border-color: rgba(124, 58, 237, .4);
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: rgba(124, 58, 237, .12);
+      border-color: rgba(124, 58, 237, .3);
+      color: #a78bfa;
+    }
+
+    .submit-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      color: #fff;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 2px 12px rgba(124, 58, 237, .3);
+    }
+
+    .submit-btn:hover {
+      box-shadow: 0 4px 20px rgba(124, 58, 237, .5);
+      transform: translateY(-1px);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: linear-gradient(145deg, var(--surface), var(--surface2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, .12), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 0;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 58, 237, .35);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #1e1b2e, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      overflow: hidden;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-author {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .card-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      background: rgba(124, 58, 237, .15);
+      color: #a78bfa;
+      border: 1px solid rgba(124, 58, 237, .2);
+      font-size: .72rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 48px;
+    }
+
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: all .2s;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .page-btn:hover,
+    .page-btn.active {
+      background: rgba(124, 58, 237, .15);
+      border-color: rgba(124, 58, 237, .3);
+      color: #a78bfa;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .total-badge {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-top: 40px;
+    }
+
+    body.low-perf canvas,
+    body.low-perf .bg-orbs,
+    body.low-perf .grid-bg {
+      display: none !important;
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      canvas,
+      .bg-orbs,
+      .grid-bg {
+        display: none !important;
+      }
+    }
+
+    @media(max-width:640px) {
+      nav a:not(.nav-cta):not(.logo) {
+        display: none;
+      }
+    }
   </style>
 </head>
+
 <body>
-<canvas id="particles"></canvas>
-<div class="bg-orbs"><div class="orb"></div><div class="orb"></div></div>
-<div class="grid-bg"></div>
-<div class="content">
-
-<header>
-  <nav>
-    <a href="/" class="logo">⚡ VibeCoder</a>
-    <a href="/showcase">쇼케이스</a>
-    <a href="/lounge">라운지</a>
-    <a href="/submit" class="nav-cta">프로젝트 올리기</a>
-  </nav>
-</header>
-
-<main>
-  <div class="page-header">
-    <h1 class="page-title">🎨 프로젝트 쇼케이스</h1>
-    <p class="page-sub">바이브 코더들이 AI로 만든 프로젝트를 구경하세요</p>
+  <canvas id="particles"></canvas>
+  <div class="bg-orbs">
+    <div class="orb"></div>
+    <div class="orb"></div>
   </div>
+  <div class="grid-bg"></div>
+  <div class="content">
 
-  <div class="filter-bar">
-    <input class="filter-input" type="text" id="search-input" placeholder="프로젝트 검색..." oninput="filterCards()"/>
-    <a href="/submit" class="submit-btn">+ 내 프로젝트 올리기</a>
-    <span class="total-badge">총 {{ total }}개</span>
-  </div>
+    <header>
+      <nav>
+        <a href="/" class="logo">⚡ VibeCoder</a>
+        <a href="/showcase" style="color: var(--text);">쇼케이스</a>
+        <a href="/lounge">라운지</a>
+        <a href="/trends">트렌드/뉴스</a>
+        <a href="/submit" class="nav-cta">프로젝트 올리기</a>
+      </nav>
+    </header>
 
-  {% if projects %}
-  <div class="projects-grid" id="projects-grid">
-    {% for proj in projects %}
-    <a href="/showcase/{{ proj.slug }}" class="project-card" data-title="{{ proj.title|lower }}" data-tags="{{ proj.tech_stack|join(' ')|lower if proj.tech_stack is not string else '' }}">
-      <div class="card-thumb">
-        {% if proj.thumbnail %}
-        <img src="{{ proj.thumbnail }}" alt="{{ proj.title }}" loading="lazy"/>
-        {% else %}⚡{% endif %}
+    <main>
+      <div class="page-header">
+        <h1 class="page-title">🎨 프로젝트 쇼케이스</h1>
+        <p class="page-sub">바이브 코더들이 AI로 만든 프로젝트를 구경하세요</p>
       </div>
-      <div class="card-body">
-        <div class="card-author">{{ proj.author or '익명코더' }}</div>
-        <div class="card-title">{{ proj.title }}</div>
-        <div class="card-desc">{{ proj.description or '' }}</div>
-        {% if proj.tech_stack %}
-        <div class="card-tags">
-          {% if proj.tech_stack is string %}
-            {% for t in proj.tech_stack[1:-1].split(',') %}<span class="tag">{{ t.strip().strip('"') }}</span>{% endfor %}
-          {% else %}
-            {% for t in proj.tech_stack[:4] %}<span class="tag">{{ t }}</span>{% endfor %}
-          {% endif %}
-        </div>
-        {% endif %}
-        <div class="card-meta">
-          <span>👁 {{ proj.view_count }}</span>
-          <span>❤️ {{ proj.likes }}</span>
-          <span style="margin-left:auto">{{ proj.created_at | fmt_date }}</span>
-        </div>
+
+      <div class="filter-bar">
+        <input class="filter-input" type="text" id="search-input" placeholder="프로젝트 검색..." oninput="filterCards()" />
+        <a href="/submit" class="submit-btn">+ 내 프로젝트 올리기</a>
+        <span class="total-badge">총 {{ total }}개</span>
       </div>
-    </a>
-    {% endfor %}
+
+      {% if projects %}
+      <div class="projects-grid" id="projects-grid">
+        {% for proj in projects %}
+        <a href="/showcase/{{ proj.slug }}" class="project-card" data-title="{{ proj.title|lower }}"
+          data-tags="{{ proj.tech_stack|join(' ')|lower if proj.tech_stack is not string else '' }}">
+          <div class="card-thumb">
+            {% if proj.thumbnail %}
+            <img src="{{ proj.thumbnail }}" alt="{{ proj.title }}" loading="lazy" />
+            {% else %}⚡{% endif %}
+          </div>
+          <div class="card-body">
+            <div class="card-author">{{ proj.author or '익명코더' }}</div>
+            <div class="card-title">{{ proj.title }}</div>
+            <div class="card-desc">{{ proj.description or '' }}</div>
+            {% if proj.tech_stack %}
+            <div class="card-tags">
+              {% if proj.tech_stack is string %}
+              {% for t in proj.tech_stack[1:-1].split(',') %}<span class="tag">{{ t.strip().strip('"') }}</span>{%
+              endfor %}
+              {% else %}
+              {% for t in proj.tech_stack[:4] %}<span class="tag">{{ t }}</span>{% endfor %}
+              {% endif %}
+            </div>
+            {% endif %}
+            <div class="card-meta">
+              <span>👁 {{ proj.view_count }}</span>
+              <span>❤️ {{ proj.likes }}</span>
+              <span style="margin-left:auto">{{ proj.created_at | fmt_date }}</span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+      {% if total_pages > 1 %}
+      <div class="pagination">
+        {% if page > 1 %}<a href="?page={{ page-1 }}" class="page-btn">←</a>{% endif %}
+        {% for p in range(1, total_pages+1) %}
+        <a href="?page={{ p }}" class="page-btn {% if p == page %}active{% endif %}">{{ p }}</a>
+        {% endfor %}
+        {% if page < total_pages %}<a href="?page={{ page+1 }}" class="page-btn">→</a>{% endif %}
+      </div>
+      {% endif %}
+
+      {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">🚀</div>
+        <p style="margin-bottom:8px">아직 프로젝트가 없습니다.</p>
+        <p style="margin-bottom:24px;font-size:.9rem">첫 번째 주인공이 되어보세요!</p>
+        <a href="/submit" class="submit-btn" style="font-size:1rem;padding:12px 28px;">프로젝트 올리기</a>
+      </div>
+      {% endif %}
+    </main>
+
+    <footer>© 2025 VibeCoder</footer>
   </div>
 
-  {% if total_pages > 1 %}
-  <div class="pagination">
-    {% if page > 1 %}<a href="?page={{ page-1 }}" class="page-btn">←</a>{% endif %}
-    {% for p in range(1, total_pages+1) %}
-    <a href="?page={{ p }}" class="page-btn {% if p == page %}active{% endif %}">{{ p }}</a>
-    {% endfor %}
-    {% if page < total_pages %}<a href="?page={{ page+1 }}" class="page-btn">→</a>{% endif %}
-  </div>
-  {% endif %}
-
-  {% else %}
-  <div class="empty-state">
-    <div class="empty-icon">🚀</div>
-    <p style="margin-bottom:8px">아직 프로젝트가 없습니다.</p>
-    <p style="margin-bottom:24px;font-size:.9rem">첫 번째 주인공이 되어보세요!</p>
-    <a href="/submit" class="submit-btn" style="font-size:1rem;padding:12px 28px;">프로젝트 올리기</a>
-  </div>
-  {% endif %}
-</main>
-
-<footer>© 2025 VibeCoder</footer>
-</div>
-
-<script>
-let isLowPerf=false;
-(function(){
-  if(/Android|iPhone|iPad/i.test(navigator.userAgent)||
-     (navigator.deviceMemory&&navigator.deviceMemory<4)){
-    document.body.classList.add('low-perf');isLowPerf=true;
-  }
-})();
-(function(){
-  const canvas=document.getElementById('particles');
-  if(!canvas||isLowPerf)return;
-  const ctx=canvas.getContext('2d');
-  let W,H,pts;
-  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-  function init(){resize();pts=Array.from({length:40},()=>({
-    x:Math.random()*W,y:Math.random()*H,
-    vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
-    r:Math.random()*1.2+.4,c:Math.random()>.5?'#7c3aed':'#06b6d4'
-  }));}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach((p,i)=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.c;ctx.globalAlpha=.5;ctx.fill();
-      for(let j=i+1;j<pts.length;j++){
-        const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
-          ctx.strokeStyle=p.c;ctx.globalAlpha=(1-d/100)*.12;ctx.lineWidth=.5;ctx.stroke();}
+  <script>
+    let isLowPerf = false;
+    (function () {
+      if (/Android|iPhone|iPad/i.test(navigator.userAgent) ||
+        (navigator.deviceMemory && navigator.deviceMemory < 4)) {
+        document.body.classList.add('low-perf'); isLowPerf = true;
       }
-    });
-    ctx.globalAlpha=1;requestAnimationFrame(draw);
-  }
-  init();window.addEventListener('resize',init);draw();
-})();
+    })();
+    (function () {
+      const canvas = document.getElementById('particles');
+      if (!canvas || isLowPerf) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, pts;
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+      function init() {
+        resize(); pts = Array.from({ length: 40 }, () => ({
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
+          r: Math.random() * 1.2 + .4, c: Math.random() > .5 ? '#7c3aed' : '#06b6d4'
+        }));
+      }
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        pts.forEach((p, i) => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.c; ctx.globalAlpha = .5; ctx.fill();
+          for (let j = i + 1; j < pts.length; j++) {
+            const q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 100) {
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = p.c; ctx.globalAlpha = (1 - d / 100) * .12; ctx.lineWidth = .5; ctx.stroke();
+            }
+          }
+        });
+        ctx.globalAlpha = 1; requestAnimationFrame(draw);
+      }
+      init(); window.addEventListener('resize', init); draw();
+    })();
 
-function filterCards(){
-  const q=document.getElementById('search-input').value.toLowerCase();
-  document.querySelectorAll('.project-card').forEach(card=>{
-    const title=card.dataset.title||'';
-    const tags=card.dataset.tags||'';
-    card.style.display=(title.includes(q)||tags.includes(q))?'':'none';
-  });
-}
-</script>
+    function filterCards() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      document.querySelectorAll('.project-card').forEach(card => {
+        const title = card.dataset.title || '';
+        const tags = card.dataset.tags || '';
+        card.style.display = (title.includes(q) || tags.includes(q)) ? '' : 'none';
+      });
+    }
+  </script>
 </body>
+
 </html>
